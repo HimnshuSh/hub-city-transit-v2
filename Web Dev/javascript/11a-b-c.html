@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arrays and Loops</title>
+</head>
+<body>
+
+    <script>
+        const nums = [10, 20, 30];
+        nums[2] = 99;
+        swapArray(nums);
+
+
+        console.log(nums[2], getLastValue(nums), nums);
+        function getLastValue(nums) {
+            for (let i = 0; i < nums.length; i++) {
+                lastValue = nums[i]
+            }
+
+            return lastValue;
+        }
+
+        function swapArray(nums) {
+            firstValue = nums[0];
+            lastValue = getLastValue(nums);
+            nums[0] = lastValue;
+            nums[nums.length - 1] = firstValue;
+        }
+    </script>
+    
+
+
+</body>
+</html>

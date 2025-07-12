@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo List Interactive</title>
+</head>
+<body>
+    <p>Todo List</p>
+    <input type="text" placeholder="Todo Name" class="js-todo-input">
+    <input type="date">
+    <button class="js-add-btn" onclick="
+        addTodo();
+    ">Add</button>
+
+    <script>
+        const todoList = [];
+
+        function addTodo() {
+            const inputElement = document.querySelector('.js-todo-input');
+            const inputValue = inputElement.value;
+
+            todoList.push(inputValue);
+
+            console.log(todoList);
+        }
+    </script>
+</body>
+</html>

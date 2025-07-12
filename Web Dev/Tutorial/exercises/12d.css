@@ -1,0 +1,17 @@
+.flexbox {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    border-radius: 1px;
+    border-color: gray;
+    border-style: solid;
+
+    align-items: center;
+
+    height: 50px;
+}
+
+.color {
+    background-color: pink;
+}

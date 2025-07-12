@@ -1,0 +1,10 @@
+/* Example for a full-screen map */
+html, body, #root {
+  height: 100%;
+  margin: 0;
+}
+
+.leaflet-container {
+  height: 100vh; /* Or any other desired height, e.g., 500px */
+  width: 100%;
+} 

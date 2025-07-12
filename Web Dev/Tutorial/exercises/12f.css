@@ -1,0 +1,29 @@
+.notification-container {
+    width: 300px;;
+    border-width: 1px;
+    border-style: solid;
+    border-color: rgb(146, 146, 146);
+    border-radius: 5px;
+}
+
+
+.panel {
+    display: flex;
+    justify-content: space-between;
+    
+    font-family: arial;
+    font-size: 18px;
+
+    align-items: center;
+    margin: 10px 15px;
+}
+
+.notification-bubble {
+    border: none;
+    background-color: rgba(36, 84, 241, 0.829);
+
+    color: white;
+    font-weight: bold;
+    padding: 4px 13px;
+    border-radius: 15px;
+}

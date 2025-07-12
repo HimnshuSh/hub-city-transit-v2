@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>button</title>
+</head>
+<body>
+    <button class="a">9a</button>
+    <button class="js-second-button">9b</button>
+    <p></p>
+
+    <button onclick="
+        document.querySelector('.js-choose').innerHTML = 'You chose: heads'
+    ">heads</button>
+
+    <button onclick="
+        document.querySelector('.js-choose').innerHTML = 'You chose: tails'
+        ">tails</button>
+    <p class="js-choose"></p>
+
+    <script>
+        console.log(document.querySelector('.a'));
+        document.querySelector('.js-second-button').innerHTML = '9b done!';
+
+        document.querySelector('.js-heads-button')
+    </script>
+</body>
+</html>

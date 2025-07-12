@@ -1,0 +1,32 @@
+.profile-picture {
+    height: 70px;
+    width: 70px;
+    object-fit: cover;
+    object-position: left;
+    border-radius: 50px;
+    margin-right: 10px;
+    vertical-align: middle;
+}
+
+input {
+    font-family: Arial;
+    font-size: 25px;
+    color: rgb(80, 80, 80);
+    border: none;
+    padding: 10px 10px;
+    width: 400px;
+    vertical-align: middle;
+}
+
+.Tweet {
+    font-family: Arial;
+    font-size: 25px;
+    font-weight: bold;
+    padding: 10px 20px;
+    color: white;
+    background-color: rgb(29, 155, 240);
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    vertical-align: middle;
+}

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script>
+        const arr = [-2, 0, 3, 10, 99, -39]
+        const nularr = [3];
+        
+        console.log(3 > null, 3 < null);
+        console.log(minMax(nularr));
+
+        function minMax(array) {
+            const minMaxOb = {
+                min: array[0],
+                max: array[0]
+            };
+
+            if (array.length === 0) {
+                minMaxOb.min = null;
+                minMaxOb.max = null;
+                return minMaxOb;
+            }
+
+            
+            for (let i = 1; i < array.length; i++) {
+                if (minMaxOb.min > array[i]) {
+                    minMaxOb.min = array[i];
+                }
+                if (minMaxOb.max < array[i]) {
+                    minMaxOb.max = array[i];
+                }
+            }
+            return minMaxOb;
+        }
+    </script>
+</body>
+</html>

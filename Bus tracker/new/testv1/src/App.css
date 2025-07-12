@@ -1,0 +1,68 @@
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap');
+
+html, body, #root {
+    margin: 0;
+    padding: 0; /* Add padding: 0 to body and html */
+    height: 100%; /* Ensure html, body, and #root take full height */
+    overflow: hidden; /* Prevent scrolling on the entire page */
+}
+
+.app-container {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column; /* Stack map and bottom bar vertically */
+    height: 100dvh; /* Use 100dvh for full viewport height */
+    width: 100vw; /* Ensure full viewport width */
+}
+
+/* Map Component Styling */
+.map-container {
+    flex-grow: 1; /* Allows the map container to take up all available space */
+    /* No fixed height needed here, flex-grow handles it */
+}
+
+.function-box {
+    position: fixed;
+    bottom: 20%;
+}
+
+/* Bottom Bar Styling */
+.bottom-bar {
+    background-color: hsl(228, 33%, 97%);
+    display: flex;
+    justify-content: space-evenly; /* Distributes buttons evenly */
+    align-items: center; /* Centers buttons vertically */
+    height: 75px; /* Fixed height for the bottom bar */
+    width: 90%;
+    flex-shrink: 0; /* Ensures it doesn't shrink when map grows */
+    padding: 2px;
+    border: none;
+    border-radius: 20px;
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 9999;
+    box-shadow: 0px 4px 4px #00000030;
+}
+
+.bottom-bar-buttons {
+    background-color: hsl(228, 33%, 97%);
+    border: none;
+    display: flex;
+    flex-direction: column;
+    width: 65px;
+    height: 58px;
+    cursor: pointer;
+    font-family: 'Quicksand';
+    font-size: 13px;
+    font-weight: 500;
+    color: hsl(0, 0%, 20%);
+}
+
+.bottom-bar-buttons > img {
+    object-fit: contain;
+    margin: 5px 0px;
+    opacity: 0.95;
+}

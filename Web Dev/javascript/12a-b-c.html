@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>12a-b-c</title>
+</head>
+<body>
+    <button class="js-button" onclick="
+        setTimeout(function () {
+            const buttonElement = document.querySelector('.js-button');
+            buttonElement.innerHTML = 'Finished!'
+        }, 1000);
+    ">Start</button>
+
+    <script>
+      const add = function(a, b) {
+        console.log(a + b);
+      };
+
+      add(2, 3);
+
+      function runTwice(fun) {
+        fun();
+        fun();
+      }
+
+      runTwice(function () {
+        console.log('12b');
+      })
+    </script>
+  </body>
+</html>
