@@ -23,8 +23,34 @@ html, body, #root {
 }
 
 .function-box {
+    background-color: hsl(228, 33%, 97%);
+    display: flex;
+    justify-content: space-evenly; /* Distributes buttons evenly */
+    align-items: center; /* Centers buttons vertically */
+    height: 200px; /* Fixed height for the bottom bar */
+    width: 90%;
+    flex-shrink: 0; /* Ensures it doesn't shrink when map grows */
+    padding: 2px;
+    border: none;
+    border-radius: 20px;
     position: fixed;
-    bottom: 20%;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 9999;
+    box-shadow: 0px 4px 4px #00000030;
+    opacity: 0;
+    transition: bottom 0.35s ease;
+}
+
+.function-box.is-visible {
+    opacity: 1; /* Ends fully visible */
+    bottom: 115px; /* Ends at its desired position */
+}
+
+.function-box.is-invisible {
+    opacity: 0;
+    bottom: 20px;
 }
 
 /* Bottom Bar Styling */

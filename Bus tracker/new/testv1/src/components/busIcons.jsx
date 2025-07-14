@@ -28,17 +28,15 @@ const busDivIcon = (busType, course) => {
             align-items: center;
             justify-content: center;
             border: 2px solid white;
-            transform: rotate(45deg);
-            transform: rotate(${course}deg);
             box-shadow: 3px -3px 3px #00000045;
+            transform: rotate(45deg) rotate(${course}deg);
         ">
             <img src="${BusIcon}" style="
                 width: 70%;
                 height: 70%;
                 object-fit: contain;
                 position: absolute;
-                transform: rotate(-45deg);
-                transform: rotate(-${course}deg);
+                transform: rotate(-45deg) rotate(${-course}deg);
             "/>
         </div>
     `;
