@@ -4,7 +4,11 @@ import '../App.css'
 import { useEffect, useState } from 'react'
 import L from 'leaflet'
 import busDivIcon from './busIcons'
-import BusRouteLayer from './routes'
+import BusRouteStopLayer from './routes'
+import { capitalizeWords } from '../util/capitalizeWords'
+
+import getNextStop from "../model/nextstop"
+
 
 // Create a separate component to add the GeoJSON layer
 function BusLocationJsonLayer ({ data }) {
@@ -13,7 +17,7 @@ function BusLocationJsonLayer ({ data }) {
     const geoJsonLayer = L.geoJSON(data, {
       pointToLayer: function (feature, latlng) {
         const busIcon = busDivIcon(feature.properties.full_name, feature.properties.course)
-        return L.marker(latlng, {icon: busIcon})
+        return L.marker(latlng, {icon: busIcon}).bindPopup(`<div>${capitalizeWords(feature.properties.full_name)} <br/> NextStop: ${getNextStop(feature)}</div>`)
       }
     }).addTo(map)
 
@@ -36,7 +40,7 @@ export default function Map()
     async function fetchBusData(url) {
       const response = await fetch(url)
       const data = await response.json()
-      setBusGeoJsonData(data)       
+      setBusGeoJsonData(data)   
     }
 
     fetchBusData(busLoctionUrl)
@@ -56,7 +60,7 @@ export default function Map()
         />
         <AttributionControl position='topright' prefix={'<a href="https://leafletjs.com" title="A JavaScript library for interactive maps"><svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="12" height="8" viewBox="0 0 12 8" class="leaflet-attribution-flag"><path fill="#4C7BE1" d="M0 0h12v4H0z"></path><path fill="#FFD500" d="M0 4h12v3H0z"></path><path fill="#E0BC00" d="M0 7h12v1H0z"></path></svg> Leaflet</a>'} />
         {busGeoJsonData && <BusLocationJsonLayer data={busGeoJsonData} />}
-        <BusRouteLayer />
+        <BusRouteStopLayer />
       </MapContainer>
     </div>
   )

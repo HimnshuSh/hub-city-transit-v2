@@ -46,7 +46,7 @@ const busDivIcon = (busType, course) => {
         className: 'custom-bus-icon',
         iconSize: [24, 24],
         iconAnchor: [12, 12],
-        popupAnchor: [0, -17]
+        popupAnchor: [0, -12]
     })
 }
 
