@@ -6,7 +6,7 @@ export default function nextStop(busData) {
     
     const route = getRouteForBus(busData.properties.full_name)
     const location = nearestPointOnLine(route, busData.geometry.coordinates, {units: "miles"})
-    if (location.properties.dist > 0.5) {
+    if (location.properties.dist > 0.2) {
         return "N/A"
     }
     const stopDistance = stopDistanceArray(route)

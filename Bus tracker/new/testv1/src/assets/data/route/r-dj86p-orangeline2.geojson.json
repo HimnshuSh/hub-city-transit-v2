@@ -34,48 +34,6 @@
             "stop": {
               "geometry": {
                 "coordinates": [
-                  -89.2856817900802,
-                  31.3277713914326
-                ],
-                "type": "Point"
-              },
-              "id": 1356560846,
-              "stop_id": "1366007",
-              "stop_name": "Train Depot"
-            }
-          },
-          {
-            "stop": {
-              "geometry": {
-                "coordinates": [
-                  -89.2906488930477,
-                  31.3254823550539
-                ],
-                "type": "Point"
-              },
-              "id": 1356560892,
-              "stop_id": "1366117",
-              "stop_name": "Front St and Forrest St."
-            }
-          },
-          {
-            "stop": {
-              "geometry": {
-                "coordinates": [
-                  -89.2892369500362,
-                  31.3260193257079
-                ],
-                "type": "Point"
-              },
-              "id": 1356560893,
-              "stop_id": "1366118",
-              "stop_name": "Main St and Short St"
-            }
-          },
-          {
-            "stop": {
-              "geometry": {
-                "coordinates": [
                   -89.2843495315612,
                   31.3251339561727
                 ],
@@ -476,6 +434,48 @@
               "id": 1356560979,
               "stop_id": "1385901",
               "stop_name": "W Pine St and 1st Ave"
+            }
+          },
+          {
+            "stop": {
+              "geometry": {
+                "coordinates": [
+                  -89.2906488930477,
+                  31.3254823550539
+                ],
+                "type": "Point"
+              },
+              "id": 1356560892,
+              "stop_id": "1366117",
+              "stop_name": "Front St and Forrest St."
+            }
+          },
+          {
+            "stop": {
+              "geometry": {
+                "coordinates": [
+                  -89.2892369500362,
+                  31.3260193257079
+                ],
+                "type": "Point"
+              },
+              "id": 1356560893,
+              "stop_id": "1366118",
+              "stop_name": "Main St and Short St"
+            }
+          },
+          {
+            "stop": {
+              "geometry": {
+                "coordinates": [
+                  -89.2856817900802,
+                  31.3277713914326
+                ],
+                "type": "Point"
+              },
+              "id": 1356560846,
+              "stop_id": "1366007",
+              "stop_name": "Train Depot"
             }
           }
         ],
