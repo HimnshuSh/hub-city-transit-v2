@@ -45,7 +45,7 @@ export default function BottomBar() {
         },
     ]
 
-    const handleButtonClick = (buttonName) => {
+    function handleButtonClick(buttonName) {
         setActiveButton(prevActiveButton =>
             prevActiveButton === buttonName ? null : buttonName
         )

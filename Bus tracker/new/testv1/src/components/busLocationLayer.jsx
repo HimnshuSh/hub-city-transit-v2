@@ -1,6 +1,5 @@
 import { useEffect } from 'react'
-import L from 'leaflet'
-import { useMap } from "react-leaflet"
+import { Marker, Popup } from "react-leaflet"
 import busDivIcon from './busIcons'
 import { capitalizeWords } from '../util/capitalizeWords'
 import nextStop from '../model/nextstop'
@@ -30,22 +29,32 @@ export function fetchBusData(busLoctionUrl, setBusData, prevBusData) {
 
 }
 
+function BusMarker({busData}) {
+
+    const { geometry, properties } = busData;
+    const position = [geometry.coordinates[1], geometry.coordinates[0]];
+    const icon = busDivIcon(properties.full_name, properties.course);
+
+    return (
+        <Marker position={position} icon={icon}>
+            <Popup>
+                <div>
+                {capitalizeWords(properties.full_name)} <br/> NextStop: {nextStop(busData)}
+                </div>
+            </Popup>
+        </Marker>
+    )
+}
+
 export function BusLocationLayer({data}) {
     
-    const map = useMap() // Get the map instance using useMap hook
-    useEffect(() => {
-        const geoJsonLayer = L.geoJSON(data, {
-            pointToLayer: function (feature, latlng) {
-            const busIcon = busDivIcon(feature.properties.full_name, feature.properties.course)
-            return L.marker(latlng, {icon: busIcon}).bindPopup(`<div>${capitalizeWords(feature.properties.full_name)} <br/> NextStop: ${nextStop(feature)}</div>`)
-            }
-        }).addTo(map)
+    return (
+        <>
+            {data.features.map(busData => (
+                <BusMarker key={busData.properties.full_name} busData={busData} />
+            ))}
+        </>
 
-        return () => {
-            map.removeLayer(geoJsonLayer)
-        }
-    }, [data])
-
-    return null
+    )
 
 }
