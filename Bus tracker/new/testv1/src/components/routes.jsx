@@ -9,10 +9,6 @@ import orangeRoute from '../assets/data/route/r-dj86p-orangeline2.geojson.json'
 import brownRoute from '../assets/data/route/r-dj86r-brownline2.geojson.json'
 import purpleRoute from '../assets/data/route/r-dj8d0-purpleline2.geojson.json'
 
-import stopProject from '../model/stopProjection'
-
-
-
 function RouteStopLayer ({data, routeColor}) { // Renamed 'color' prop to 'routeColor' for consistency
 
     const map = useMap()

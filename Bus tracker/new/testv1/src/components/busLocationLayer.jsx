@@ -1,14 +1,51 @@
-export default function BusLocationLayer() {
+import { useEffect } from 'react'
+import L from 'leaflet'
+import { useMap } from "react-leaflet"
+import busDivIcon from './busIcons'
+import { capitalizeWords } from '../util/capitalizeWords'
+import nextStop from '../model/nextstop'
+import isEqual from 'react-fast-compare'
+
+export function fetchBusData(busLoctionUrl, setBusData, prevBusData) {
+
+    useEffect(() => {
+        
+        async function getBusData(url) {
+            const response = await fetch(url)
+            const data = await response.json()
+
+            if(!isEqual(prevBusData.current, data)) {
+                setBusData(data)
+                prevBusData.current = data
+            }
+        }
+
+        getBusData(busLoctionUrl)
+
+        const interval = setInterval(() => getBusData(busLoctionUrl), 5000)
+
+        return () => clearInterval(interval)
     
-    const url = "https://utility.arcgis.com/usrsvcs/servers/b02066689d504f5f9428029f7268e060/rest/services/Hosted/8bd5047cc5bf4195887cc5237cf0d3e0_Track_View/FeatureServer/1/query?f=geojson&returnGeometry=true&spatialRel=esriSpatialRelIntersects&geometry={%22xmin%22:-9952239.718110478,%22ymin%22:3657331.85371723454,%22xmax%22:-9933358.86251328,%22ymax%22:3679195.0687008603,%22spatialReference%22:{%22wkid%22:102100}}&geometryType=esriGeometryEnvelope&inSR=102100&outFields=location_timestamp,course,full_name,speed&returnCentroid=false&returnExceededLimitFeatures=false&outSR=4326"
+    }, [])
 
-    async function getData() {
-        const response = await fetch(url)   
-        const data = await response.json()
-        return data
-    }
+}
 
-    const busData = getData()
+export function BusLocationLayer({data}) {
+    
+    const map = useMap() // Get the map instance using useMap hook
+    useEffect(() => {
+        const geoJsonLayer = L.geoJSON(data, {
+            pointToLayer: function (feature, latlng) {
+            const busIcon = busDivIcon(feature.properties.full_name, feature.properties.course)
+            return L.marker(latlng, {icon: busIcon}).bindPopup(`<div>${capitalizeWords(feature.properties.full_name)} <br/> NextStop: ${nextStop(feature)}</div>`)
+            }
+        }).addTo(map)
 
-    busData = 
+        return () => {
+            map.removeLayer(geoJsonLayer)
+        }
+    }, [data])
+
+    return null
+
 }
