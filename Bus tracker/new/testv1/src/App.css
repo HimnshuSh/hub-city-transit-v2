@@ -114,14 +114,28 @@ html, body, #root {
 }
 
 br {
-    margin: 0px 0px 10px 0px;
-}
-
-.leaflet-popup {
-    background-color: hsl(228, 33%, 97%);
+    margin: 0px 0px 2px 0px;
 }
 
 .leaflet-popup-content {
     font-family: 'Quicksand';
     font-weight: 500;
+    margin: 10px;
+}
+
+.leaflet-popup-content-wrapper,
+.leaflet-popup-tip {
+    background-color: hsl(228, 33%, 97%);
+}
+
+.leaflet-popup-content-wrapper {
+    padding: 1px;
+}
+
+.bus-marker-popup-name {
+    margin: 0 0 5px 0;
+    padding: 0;
+    text-align: center;
+    font-size: 18px;
+    font-weight: 700;
 }

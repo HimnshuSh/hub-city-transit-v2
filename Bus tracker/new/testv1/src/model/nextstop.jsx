@@ -1,18 +1,23 @@
 import { nearestPointOnLine } from "@turf/nearest-point-on-line"
 import getRouteForBus from "../util/getRouteForBus"
-import stopDistanceArray from "./stopProjection"
+import projectStopToRoute from "./stopProjection"
 
-export default function nextStop(busData) {
+export default function getNextStop(busData) {
     
     const route = getRouteForBus(busData.properties.full_name)
     const location = nearestPointOnLine(route, busData.geometry.coordinates, {units: "miles"})
-    if (location.properties.dist > 0.2) {
-        return "N/A"
+    if (location.properties.dist > 0.1) {
+        return {
+            stopName: "N/A",
+            coordinates: null,
+            distance: null
+        }
     }
-    const stopDistance = stopDistanceArray(route)
+    const stopDistance = projectStopToRoute(route) //returns array containing stops projected onto route with distance, name & coordinates
 
     for (stop of stopDistance) {
-        if (stop.distance > location.properties.location)
-            return stop.stopName
+        if (location.properties.location < stop.distance) {
+            return stop
+        }
     }
 }

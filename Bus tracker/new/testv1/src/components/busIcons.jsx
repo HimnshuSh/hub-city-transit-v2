@@ -2,7 +2,7 @@ import L from 'leaflet'
 
 import BusIcon from '../assets/icons/bus-icon2.png'
 
-const busColor = {
+export const busColor = {
     "hct blue2" : "hsl(200, 100%, 50%)",
     "hct blue1" : "hsl(200, 100%, 50%)",
     "hct gold2" : "hsl(44, 96%, 59%)",
