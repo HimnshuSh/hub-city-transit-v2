@@ -6,18 +6,14 @@ export function fetchBusData(busLoctionUrl, setBusData, prevBusData) {
     
     useEffect(() => {
         async function getBusData(url) {
-            console.log("Getting data")
             const response = await fetch(url)
             const data = await response.json()
 
             if(!isEqual(prevBusData.current, data)) {
-                console.log("New Data Arrived")
                 setBusData(data)
                 prevBusData.current = data
             }
-            else {
-                console.log("Same Data")
-            }
+
         }
 
         getBusData(busLoctionUrl)

@@ -1,55 +1,45 @@
-import { useState } from 'react'
-import ButtonComponent from './button'
-import '../App.css'
+import { useState } from 'react';
+import ButtonComponent from './button';
 
-import displaySchedule from '../model/displaySchedule'
-import displayRoutes from '../model/displayRoutes'
-import displaySearch from '../model/displaySearch'
-import displayFare from '../model/displayFare'
-import displayLegend from '../model/displayLegend'
+import DisplaySchedule from '../model/displaySchedule';
+import DisplayRoutes from '../model/displayRoutes';
+import DisplaySearch from '../model/displaySearch';
+import DisplayFare from '../model/displayFare';
+import DisplayLegend from '../model/displayLegend';
 
-export default function BottomBar() {
-
-    const [activeButton, setActiveButton] = useState(null)
+export default function BottomBar({ busData }) {
+    const [activeButton, setActiveButton] = useState(null);
 
     const buttonArray = [
-        {
-            name: 'Schedule',
-            icon: 'src/assets/icons/schedule-icon2.png',
-            func: displaySchedule,
-            height: '30px',
-        },
-        {
-            name: 'Routes',
-            icon: 'src/assets/icons/route-icon.png',
-            func: displayRoutes,
-            height: '30px',
-        },
-        {
-            name: 'Search',
-            icon: 'src/assets/icons/search-icon2.png',
-            func: displaySearch,
-            height: '30px',
-        },
-        {
-            name: 'Fare',
-            icon: 'src/assets/icons/fare-icon.png',
-            func: displayFare,
-            height: '30px',
-        },
-        {
-            name: 'Legend',
-            icon: 'src/assets/icons/legend-icon.png',
-            func: displayLegend,
-            height: '30px',
-        },
-    ]
+        { name: 'Schedule', icon: 'src/assets/icons/schedule-icon2.png', height: '30px' },
+        { name: 'Routes', icon: 'src/assets/icons/route-icon.png', height: '30px' },
+        { name: 'Search', icon: 'src/assets/icons/search-icon2.png', height: '30px' },
+        { name: 'Fare', icon: 'src/assets/icons/fare-icon.png', height: '30px' },
+        { name: 'Legend', icon: 'src/assets/icons/legend-icon.png', height: '30px' },
+    ];
 
     function handleButtonClick(buttonName) {
         setActiveButton(prevActiveButton =>
             prevActiveButton === buttonName ? null : buttonName
-        )
+        );
     }
+
+    const renderActiveComponent = () => {
+        switch (activeButton) {
+            case 'Schedule':
+                return <DisplaySchedule />;
+            case 'Routes':
+                return <DisplayRoutes busData={busData} />;
+            case 'Search':
+                return <DisplaySearch />;
+            case 'Fare':
+                return <DisplayFare />;
+            case 'Legend':
+                return <DisplayLegend />;
+            default:
+                return null;
+        }
+    };
 
     return (
         <>
@@ -63,11 +53,10 @@ export default function BottomBar() {
                     />
                 ))}
             </div>
-            {activeButton && (
-                <div className={`function-box`}>
-                    {buttonArray.find(button => button.name === activeButton)?.func()}
-                </div>
-            )}
+            
+            <div className={`function-box`}>
+                {renderActiveComponent()}
+            </div>
         </>
-    )
+    );
 }

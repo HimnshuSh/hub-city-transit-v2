@@ -36,8 +36,6 @@ export default async function etaForNextStop(busData, stopData) {
     const reponse = await fetch(`https://api.tomtom.com/routing/1/calculateRoute/${routeSegment}/json?key=${apiKey}&traffic=true`)
     const tomtomData = await reponse.json()
     const time = await tomtomData.routes[0].summary.travelTimeInSeconds
-
-    console.log("Api called")
-
+    
     return time
 }

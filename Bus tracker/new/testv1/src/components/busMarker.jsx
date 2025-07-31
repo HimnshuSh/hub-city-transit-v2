@@ -24,7 +24,6 @@ export default function BusMarker({busData}) {
 
     useEffect(() => {
         if (!isEqual(prevBusData.current, busData)) {
-            console.log("new data for " + busData.properties.full_name + `At ${new Date().toLocaleTimeString()}`)
             setLastKnownTime(new Date())
             prevBusData.current = busData
         }
@@ -37,8 +36,6 @@ export default function BusMarker({busData}) {
                     .then(sec => {
                     const etaTime = new Date(lastKnownTime.getTime())
                     etaTime.setSeconds(etaTime.getSeconds() + sec)
-
-                    console.log("calling eta fetch for: ", busData.properties.full_name)
                     
                     setEtaTime(`ETA: ${etaTime.toLocaleTimeString()}`)
                     prevTime.current = lastKnownTime
