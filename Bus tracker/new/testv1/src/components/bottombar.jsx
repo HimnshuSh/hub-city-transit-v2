@@ -2,7 +2,7 @@ import { useState } from 'react';
 import ButtonComponent from './button';
 
 import DisplaySchedule from '../model/displaySchedule';
-import DisplayRoutes from '../model/displayRoutes';
+import DisplayRoutes from '../model/displayRoutes2';
 import DisplaySearch from '../model/displaySearch';
 import DisplayFare from '../model/displayFare';
 import DisplayLegend from '../model/displayLegend';

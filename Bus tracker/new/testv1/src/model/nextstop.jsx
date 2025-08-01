@@ -20,4 +20,6 @@ export default function getNextStop(busData) {
             return stop
         }
     }
+
+    return stopDistance[0]; //cannot find the array it occurs when the bus moves just past the last stop
 }

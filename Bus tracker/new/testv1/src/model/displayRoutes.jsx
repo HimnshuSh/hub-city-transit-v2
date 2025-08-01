@@ -11,9 +11,7 @@ function Route({ route, showRoute, setShowRoute }) {
     const id = route.features[0].properties.route_short_name
 
     const stopDataArray = route.features[0].properties.route_stops.map(stopData => stopData.stop.stop_name)
-    console.log(stopDataArray)
-
-
+    
     function toggleRoute() {
         setShowRoute(prev => (prev === id ? null : id))
     }
