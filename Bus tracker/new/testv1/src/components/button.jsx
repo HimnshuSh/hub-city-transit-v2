@@ -8,5 +8,5 @@ export default function ButtonComponent({ prop, isActive, onClick }) {
             <img src={prop.icon} height={prop.height} />
             <label>{prop.name}</label>
         </button>
-    );
+    )
 }
