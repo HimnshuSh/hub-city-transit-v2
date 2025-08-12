@@ -1,0 +1,294 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.3356357283762,
+          31.324897528937
+        ]
+      },
+      "properties": {
+        "type": "Transfer",
+        "stopName": "Hardy St and 30th St  (JR Gas Station)",
+        "stopId": "1366031",
+        "routeNames": [
+          "Blue Line",
+          "Gold Line"
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.3404719602485,
+          31.3247321877362
+        ]
+      },
+      "properties": {
+        "type": "Transfer",
+        "stopName": "Hardy St and 34th Ave",
+        "stopId": "1366076",
+        "routeNames": [
+          "Blue Line",
+          "Green Line"
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.3343989492609,
+          31.3246569610849
+        ]
+      },
+      "properties": {
+        "type": "Transfer",
+        "stopName": "Hardy St and 30th Ave",
+        "stopId": "1366077",
+        "routeNames": [
+          "Blue Line",
+          "Green Line"
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.3326006661661,
+          31.3238088961898
+        ]
+      },
+      "properties": {
+        "type": "Transfer",
+        "stopName": "Hardy St and 29th Ave",
+        "stopId": "1366078",
+        "routeNames": [
+          "Blue Line",
+          "Green Line"
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.2906488930477,
+          31.3254823550539
+        ]
+      },
+      "properties": {
+        "type": "Transfer",
+        "stopName": "Front St and Forrest St.",
+        "stopId": "1366117",
+        "routeNames": [
+          "Blue Line",
+          "Orange Line"
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.2892369500362,
+          31.3260193257079
+        ]
+      },
+      "properties": {
+        "type": "Transfer",
+        "stopName": "Main St and Short St",
+        "stopId": "1366118",
+        "routeNames": [
+          "Blue Line",
+          "Orange Line",
+          "Brown Line"
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.2856817900802,
+          31.3277713914326
+        ]
+      },
+      "properties": {
+        "type": "Station",
+        "stopName": "Train Depot",
+        "stopId": "1366007",
+        "routeNames": [
+          "Blue Line",
+          "Orange Line",
+          "Brown Line",
+          "Purple Line"
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.3299200641263,
+          31.3355130907934
+        ]
+      },
+      "properties": {
+        "type": "Transfer",
+        "stopName": "Service Rd @ Hillcrest",
+        "stopId": "1366204",
+        "routeNames": [
+          "Green Line",
+          "Gold Line"
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.3194162915476,
+          31.3080127949791
+        ]
+      },
+      "properties": {
+        "type": "Station",
+        "stopName": "Walmart @ 49",
+        "stopId": "1385893",
+        "routeNames": [
+          "Green Line",
+          "Red Line",
+          "Orange Line"
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.3151330769675,
+          31.3092630674746
+        ]
+      },
+      "properties": {
+        "type": "Transfer",
+        "stopName": "On Service Rd at Waffle House",
+        "stopId": "1385890",
+        "routeNames": [
+          "Red Line",
+          "Orange Line"
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.3179970658928,
+          31.3099950212159
+        ]
+      },
+      "properties": {
+        "type": "Transfer",
+        "stopName": "On Service Rd near Popeye's Chicken",
+        "stopId": "1385891",
+        "routeNames": [
+          "Red Line",
+          "Orange Line"
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.3183762963819,
+          31.3114651092937
+        ]
+      },
+      "properties": {
+        "type": "Transfer",
+        "stopName": "Service Road and Cloverleaf Dr",
+        "stopId": "1385892",
+        "routeNames": [
+          "Red Line",
+          "Orange Line"
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.2852110737369,
+          31.31574095021
+        ]
+      },
+      "properties": {
+        "type": "Transfer",
+        "stopName": "Edwards St and Katie St",
+        "stopId": "1385885",
+        "routeNames": [
+          "Orange Line",
+          "Purple Line"
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.2851544520811,
+          31.3118933040222
+        ]
+      },
+      "properties": {
+        "type": "Transfer",
+        "stopName": "Edwards St and Duke St",
+        "stopId": "1367949",
+        "routeNames": [
+          "Orange Line",
+          "Purple Line"
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.2851478150119,
+          31.3063114417649
+        ]
+      },
+      "properties": {
+        "type": "Transfer",
+        "stopName": "Edwards St and Tuscan Av",
+        "stopId": "1367950",
+        "routeNames": [
+          "Orange Line",
+          "Purple Line"
+        ]
+      }
+    }
+  ]
+}

@@ -39,7 +39,7 @@ const busDivIcon = (busType, course) => {
                 transform: rotate(-45deg) rotate(${-course}deg);
             "/>
         </div>
-    `;
+    `
     
     return L.divIcon({
         html: customHtml,

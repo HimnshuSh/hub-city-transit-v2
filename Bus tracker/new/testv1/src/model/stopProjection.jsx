@@ -1,4 +1,4 @@
-import { nearestPointOnLine } from "@turf/nearest-point-on-line";
+import { nearestPointOnLine } from "@turf/nearest-point-on-line"
 
 export default function projectStopToRoute(route) {
     
@@ -18,11 +18,12 @@ export default function projectStopToRoute(route) {
 
             return {
                 stopName: stop.properties.stop_name,
+                stopId: stop.properties.stop_id,
                 coordinates: stop.geometry.coordinates,
                 distance: stopPoint.properties.location
             }
         }
     )
 
-    return stopCal;
+    return stopCal
 }

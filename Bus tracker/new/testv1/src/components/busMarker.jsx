@@ -1,16 +1,17 @@
 import { useState, useEffect, useRef } from "react"
-import { Marker, Popup } from "react-leaflet"
+import { Marker, Popup, useMap } from "react-leaflet"
 import busDivIcon, {busColor} from './busIcons'
 import { capitalizeWords } from '../util/capitalizeWords'
 import getNextStop from '../model/nextstop'
 import etaForNextStop from '../model/etaForNextStop'
 import isEqual from "react-fast-compare"
+import L from 'leaflet'
 
-export default function BusMarker({busData}) {
-
-    const { geometry, properties } = busData;
-    const position = [geometry.coordinates[1], geometry.coordinates[0]];
-    const icon = busDivIcon(properties.full_name, properties.course);
+export default function BusMarker({ busData }) {
+    const { geometry, properties } = busData
+    const position = [geometry.coordinates[1], geometry.coordinates[0]]
+    const icon = busDivIcon(properties.full_name, properties.course)
+    const map = useMap()
 
     const prevBusData = useRef(busData)
     const [lastKnownTime, setLastKnownTime] = useState("N/A")
@@ -45,15 +46,33 @@ export default function BusMarker({busData}) {
         }
     }, [busData, lastKnownTime, open])
 
+    const handleNextStopClick = () => {
+        if (stopData.stopName !== "N/A") {
+            const stopCoordinates = [stopData.coordinates[1] - 0.0007, stopData.coordinates[0]]
+            if (stopCoordinates) {
+                
+                map.flyTo(stopCoordinates, 18)
+
+                map.eachLayer(layer => {
+                    if (layer instanceof L.CircleMarker && layer.feature.properties.stop_id === stopData.stopId) {
+                        setTimeout(() => layer.openPopup(), 500)
+                    }
+                })
+            }
+        }
+    }
+
     return (
         <Marker position={position} icon={icon} eventHandlers={
             {popupopen: () => {setOpen(true)}, popupclose: () => {setOpen(false)}}}>
             <Popup className='popup'>
                 <div className='popup-container'>
                     <div className='bus-marker-popup-name' style={{color: color}}>
-                    {capitalizeWords(properties.full_name)}
+                        {capitalizeWords(properties.full_name)}
                     </div>
-                    NextStop: {(stopData.stopName === "N/A") ? "N/A" : stopData.stopName}
+                    Next Stop: <span className="next-stop-link" style={{cursor: "pointer"}} onClick={handleNextStopClick}>
+                        {(stopData.stopName === "N/A") ? "N/A" : stopData.stopName}
+                    </span>
                     <br/>
                     Last Known Time: {lastKnownTime === "N/A" ? "N/A" : lastKnownTime.toLocaleTimeString()}
                     <br/>

@@ -11,6 +11,7 @@ export default function getNextStop(busData, busDistance) {
     if (location.properties.dist > 0.1) {
         return {
             stopName: "N/A",
+            stopId: null,
             coordinates: null,
             distance: null
         }
@@ -28,5 +29,5 @@ export default function getNextStop(busData, busDistance) {
         }
     }
 
-    return stopDistance[0]; //cannot find the array it occurs when the bus moves just past the last stop
+    return stopDistance[0] //cannot find the array it occurs when the bus moves just past the last stop
 }

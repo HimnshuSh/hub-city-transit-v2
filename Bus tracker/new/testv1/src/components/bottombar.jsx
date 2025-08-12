@@ -1,5 +1,6 @@
-import { useState } from 'react'
+import { useRef, useEffect, useState } from 'react'
 import ButtonComponent from './button'
+import L from 'leaflet'
 
 import DisplaySchedule from '../model/displaySchedule'
 import DisplayRoutes from '../model/displayRoutes2'
@@ -9,6 +10,7 @@ import DisplayLegend from '../model/displayLegend'
 
 export default function BottomBar({ busData }) {
     const [activeButton, setActiveButton] = useState(null)
+    const bottomBarRef = useRef(null)
 
     const buttonArray = [
         { name: 'Schedule', icon: 'src/assets/icons/schedule-icon2.png', height: '30px' },
@@ -23,6 +25,13 @@ export default function BottomBar({ busData }) {
             prevActiveButton === buttonName ? null : buttonName
         )
     }
+
+    useEffect(() => {
+        if (bottomBarRef.current) {
+            L.DomEvent.disableClickPropagation(bottomBarRef.current);
+            L.DomEvent.disableScrollPropagation(bottomBarRef.current);
+        }
+    }, [])
 
     const renderActiveComponent = () => {
         switch (activeButton) {
@@ -42,7 +51,7 @@ export default function BottomBar({ busData }) {
     }
 
     return (
-        <>
+        <div ref={bottomBarRef}>
             <div className='bottom-bar'>
                 {buttonArray.map(type => (
                     <ButtonComponent
@@ -57,6 +66,6 @@ export default function BottomBar({ busData }) {
             <div className={`function-box`}>
                 {renderActiveComponent()}
             </div>
-        </>
+        </div>
     )
 }

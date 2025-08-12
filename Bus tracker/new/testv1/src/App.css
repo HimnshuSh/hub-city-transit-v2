@@ -86,6 +86,10 @@ html, body, #root {
     opacity: 0.95;
 }
 
+.function-box {
+    font-size: 16px;
+}
+
 .fare-element-container {
     color: hsl(0, 0%, 10%);
     margin: 0;

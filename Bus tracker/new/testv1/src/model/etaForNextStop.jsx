@@ -1,7 +1,7 @@
-import { lineString, point } from "@turf/helpers";
-import getRouteForBus from "../util/getRouteForBus";
-import nearestPointOnLine from "@turf/nearest-point-on-line";
-import lineSlice from "@turf/line-slice";
+import { lineString, point } from "@turf/helpers"
+import getRouteForBus from "../util/getRouteForBus"
+import nearestPointOnLine from "@turf/nearest-point-on-line"
+import lineSlice from "@turf/line-slice"
 
 function getRouteSegment(busData, stopData) {
     
