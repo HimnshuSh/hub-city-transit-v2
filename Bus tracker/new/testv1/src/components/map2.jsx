@@ -1,12 +1,13 @@
-import { MapContainer, TileLayer, AttributionControl } from 'react-leaflet'
+import { AttributionControl, MapContainer, ZoomControl } from 'react-leaflet'
 import { useRef, useState } from 'react'
-import {fetchBusData, BusLocationLayer} from './busLocationLayer'
+import { fetchBusData, BusLocationLayer } from './busLocationLayer'
 import BusRouteStopLayer from './routes'
 import BottomBar from "./bottombar"
 import 'leaflet/dist/leaflet.css'
 import '../App.css'
+import TileLayer from './tileLayer'
 
-export default function Map() 
+export default function Map()
 {
     const position = [31.3114517, -89.3176855] // [latitude, longitude]
     const bound = [[31.2114517, -89.4176855], [31.4114517, -89.2176855]]
@@ -20,15 +21,21 @@ export default function Map()
     return (
         <>
             <div className='map-container'>
-                <MapContainer maxBounds={bound} minZoom={12} center={position} zoom={11.5} style={{ height: '100%', width: '100%' }} attributionControl={false}>
-                    <TileLayer
-                    url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                    attribution='&copy <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-                    />
-                    <AttributionControl position='topright' prefix={'<a href="https://leafletjs.com" title="A JavaScript library for interactive maps"><svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="12" height="8" viewBox="0 0 12 8" class="leaflet-attribution-flag"><path fill="#4C7BE1" d="M0 0h12v4H0z"></path><path fill="#FFD500" d="M0 4h12v3H0z"></path><path fill="#E0BC00" d="M0 7h12v1H0z"></path></svg> Leaflet</a>'} />
+                <MapContainer
+                    maxBounds={bound}
+                    minZoom={12}
+                    center={position}
+                    zoom={11.5}
+                    style={{ height: '100%', width: '100%' }}
+                    attributionControl={true}
+                >
+                    <TileLayer />
                     <BusRouteStopLayer />
-                    {busData && <BusLocationLayer data={busData}/>}
-                    <BottomBar busData={busData}/>
+                    {busData && <BusLocationLayer data={busData} />}
+                    <BottomBar busData={busData} />
+                    <AttributionControl
+                        position="topright"
+                    />
                 </MapContainer>
             </div>
         </>
