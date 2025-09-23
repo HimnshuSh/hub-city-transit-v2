@@ -4,8 +4,8 @@ import busDivIcon, { busColor } from './busIcons'
 import { capitalizeWords } from '../util/capitalizeWords'
 import getNextStop from '../model/nextstop'
 import etaForNextStop from '../model/etaForNextStop'
-import isEqual from "react-fast-compare"
 import L from 'leaflet'
+import isEqual from "react-fast-compare"
 
 export default function BusMarker({ busData }) {
     const { geometry, properties } = busData
@@ -13,11 +13,9 @@ export default function BusMarker({ busData }) {
     const icon = busDivIcon(properties.full_name, properties.course)
     const map = useMap()
 
-    const prevBusData = useRef(busData)
-    const [lastKnownTime, setLastKnownTime] = useState("N/A")
-
     const [open, setOpen] = useState(false)
-    const prevTime = useRef(lastKnownTime)
+    const prevBusData = useRef()
+    const lastKnownTime = new Date(busData.properties.location_timestamp)
     const [EtaTime, setEtaTime] = useState("ETA: N/A")
 
     const stopData = getNextStop(busData)
@@ -25,30 +23,20 @@ export default function BusMarker({ busData }) {
 
     useEffect(() => {
         if (!isEqual(prevBusData.current, busData)) {
-            setLastKnownTime(new Date())
-            prevBusData.current = busData
-        }
-    }, [busData, lastKnownTime, prevBusData.current])
-
-    useEffect(() => {
-        if (!isEqual(prevTime.current, lastKnownTime)) {
-            if ((stopData.stopName !== "N/A") && (lastKnownTime !== "N/A") && open) {
-                etaForNextStop(busData, stopData)
-                    .then(sec => {
-                        const etaTime = new Date(lastKnownTime.getTime())
-                        console.log(etaTime.toLocaleTimeString())
-                        const test = new Date(busData.properties.location_timestamp)
-                        console.log(test.toLocaleTimeString())
+            if (open & stopData.stopName !== "N/A") {
+                etaForNextStop(busData, stopData).then(
+                    sec => {
+                        const etaTime = lastKnownTime
 
                         etaTime.setSeconds(etaTime.getSeconds() + sec)
 
                         setEtaTime(`ETA: ${etaTime.toLocaleTimeString()}`)
-                        prevTime.current = lastKnownTime
                     }
-                    )
+                )
+                prevBusData.current = busData
             }
         }
-    }, [busData, lastKnownTime, open])
+    }, [busData, open])
 
     const handleNextStopClick = () => {
         if (stopData.stopName !== "N/A") {
@@ -78,7 +66,7 @@ export default function BusMarker({ busData }) {
                         {(stopData.stopName === "N/A") ? "N/A" : stopData.stopName}
                     </span>
                     <br />
-                    Last Known Time: {lastKnownTime === "N/A" ? "N/A" : lastKnownTime.toLocaleTimeString()}
+                    Last Known Time: {lastKnownTime.toLocaleTimeString()}
                     <br />
                     {EtaTime}
                 </div>
