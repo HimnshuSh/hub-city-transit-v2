@@ -42,7 +42,7 @@ export default function displayFare() {
                     <div>
                         <div>City of Hattiesburg Employees</div>
                         <span className="list-span" >FREE</span>
-                    </div>                    
+                    </div>
                 </li>
             </ul>
         </div>

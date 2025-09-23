@@ -12,12 +12,12 @@ import BusIcon from '../assets/icons/bus-icon2.png'
 import stationTransferStops from '../assets/data/route/stationTransferStop.json'
 import isEqual from "react-fast-compare"
 
-function RouteStopLayer ({data, routeColor}) { // Renamed 'color' prop to 'routeColor' for consistency
+function RouteStopLayer({ data, routeColor }) { // Renamed 'color' prop to 'routeColor' for consistency
 
     const map = useMap()
     const prevZoom = useRef()
 
-    useEffect(()=> {
+    useEffect(() => {
         const routeLayer = L.geoJSON(data, {
             style: function (feature) {
                 return {
@@ -115,7 +115,7 @@ function RouteStopLayer ({data, routeColor}) { // Renamed 'color' prop to 'route
                     )
                 } else {
                     const routeNamesString = feature.properties.routeNames.join(", ")
-                    return L.marker(latlng, {icon: stationIcon}).bindPopup(`
+                    return L.marker(latlng, { icon: stationIcon }).bindPopup(`
                         <div class="route-layer">
                             <span style="display: block; text-align: center; margin-bottom: 5px; font-size: 16px; font-weight: 600;">Bus Station</span>
                             Location: ${feature.properties.stopName}
@@ -127,36 +127,36 @@ function RouteStopLayer ({data, routeColor}) { // Renamed 'color' prop to 'route
             }
         }).addTo(map)
 
-        
+
         map.on('zoomend', () => {
             const currentZoom = map.getZoom()
-            if (!isEqual(prevZoom.current, currentZoom)){
+            if (!isEqual(prevZoom.current, currentZoom)) {
                 if (currentZoom > 17) {
-                    stopLayer.eachLayer(function(marker) {
+                    stopLayer.eachLayer(function (marker) {
                         marker.setRadius(7.5)
                     })
-                    stationTransferLayer.eachLayer(function(circleMarker) {
-                        if(circleMarker.feature.properties.type === "Transfer") {
+                    stationTransferLayer.eachLayer(function (circleMarker) {
+                        if (circleMarker.feature.properties.type === "Transfer") {
                             circleMarker.setRadius(7.5)
                         }
                     })
                 }
                 else if (currentZoom > 14 && currentZoom <= 17) {
-                    stopLayer.eachLayer(function(marker) {
+                    stopLayer.eachLayer(function (marker) {
                         marker.setRadius(5)
                     })
-                    stationTransferLayer.eachLayer(function(circleMarker) {
-                        if(circleMarker.feature.properties.type === "Transfer") {
+                    stationTransferLayer.eachLayer(function (circleMarker) {
+                        if (circleMarker.feature.properties.type === "Transfer") {
                             circleMarker.setRadius(5)
                         }
-                    })                    
+                    })
                 }
                 else if (currentZoom <= 14) {
-                    stopLayer.eachLayer(function(marker) {
+                    stopLayer.eachLayer(function (marker) {
                         marker.setRadius(3)
                     })
-                    stationTransferLayer.eachLayer(function(circleMarker) {
-                        if(circleMarker.feature.properties.type === "Transfer") {
+                    stationTransferLayer.eachLayer(function (circleMarker) {
+                        if (circleMarker.feature.properties.type === "Transfer") {
                             circleMarker.setRadius(3)
                         }
                     })
@@ -178,14 +178,14 @@ function RouteStopLayer ({data, routeColor}) { // Renamed 'color' prop to 'route
 export default function BusRouteStopLayer() {
     return (
         <>
-            <RouteStopLayer data={greenRoute} routeColor={"hsl(112, 63%, 52%)"}/>
-            <RouteStopLayer data={goldRoute} routeColor={"hsl(44, 96%, 59%)"}/>
-            <RouteStopLayer data={blueRoute} routeColor={"hsl(200, 100%, 50%)"}/>
-            <RouteStopLayer data={redRoute} routeColor={"hsl(12, 82%, 50%)"}/>
-            <RouteStopLayer data={orangeRoute} routeColor={"hsl(27, 100%, 50%)"}/>
-            <RouteStopLayer data={redRoute} routeColor={"hsl(12, 82%, 50%)"}/>
-            <RouteStopLayer data={brownRoute} routeColor={"hsl(17, 74%, 37%)"}/>
-            <RouteStopLayer data={purpleRoute} routeColor={"hsl(250, 100%, 77%)"}/>
+            <RouteStopLayer data={greenRoute} routeColor={"hsl(112, 63%, 52%)"} />
+            <RouteStopLayer data={goldRoute} routeColor={"hsl(44, 96%, 59%)"} />
+            <RouteStopLayer data={blueRoute} routeColor={"hsl(200, 100%, 50%)"} />
+            <RouteStopLayer data={redRoute} routeColor={"hsl(12, 82%, 50%)"} />
+            <RouteStopLayer data={orangeRoute} routeColor={"hsl(27, 100%, 50%)"} />
+            <RouteStopLayer data={redRoute} routeColor={"hsl(12, 82%, 50%)"} />
+            <RouteStopLayer data={brownRoute} routeColor={"hsl(17, 74%, 37%)"} />
+            <RouteStopLayer data={purpleRoute} routeColor={"hsl(250, 100%, 77%)"} />
         </>
     )
 }

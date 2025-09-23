@@ -62,7 +62,7 @@ export default function BottomBar({ busData }) {
                     />
                 ))}
             </div>
-            
+
             <div className={`function-box`}>
                 {renderActiveComponent()}
             </div>

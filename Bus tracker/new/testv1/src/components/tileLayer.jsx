@@ -10,6 +10,7 @@ export default function TileLayer() {
     useEffect(() => {
         const maplibreLayer = L.maplibreGL({
             style: 'https://tiles.openfreemap.org/styles/bright',
+            attributionControl: false
         })
         maplibreLayer.addTo(map)
 
@@ -17,6 +18,6 @@ export default function TileLayer() {
             map.removeLayer(maplibreLayer)
         }
     }, [map])
-    
+
     return null
 }

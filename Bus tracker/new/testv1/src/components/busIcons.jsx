@@ -3,22 +3,22 @@ import L from 'leaflet'
 import BusIcon from '../assets/icons/bus-icon2.png'
 
 export const busColor = {
-    "hct blue2" : "hsl(200, 100%, 50%)",
-    "hct blue1" : "hsl(200, 100%, 50%)",
-    "hct gold2" : "hsl(44, 96%, 59%)",
-    "hct Gold1" : "hsl(44, 96%, 59%)",
-    "hct green" : "hsl(112, 63%, 52%)",
-    "hct brown" : "hsl(17, 74%, 37%)",
+    "hct blue2": "hsl(200, 100%, 50%)",
+    "hct blue1": "hsl(200, 100%, 50%)",
+    "hct gold2": "hsl(44, 96%, 59%)",
+    "hct Gold1": "hsl(44, 96%, 59%)",
+    "hct green": "hsl(112, 63%, 52%)",
+    "hct brown": "hsl(17, 74%, 37%)",
     "hct purple": "hsl(250, 100%, 77%)",
-    "hct red"   : "hsl(12, 82%, 50%)",
+    "hct red": "hsl(12, 82%, 50%)",
     "hct orange": "hsl(27, 100%, 50%)"
 }
 
 const busDivIcon = (busType, course) => {
-    
+
     const backgroundColor = busColor[busType]
 
-    const customHtml =  `
+    const customHtml = `
         <div style="
             background-color: ${backgroundColor};
             border-radius: 0 50% 50%;
@@ -40,7 +40,7 @@ const busDivIcon = (busType, course) => {
             "/>
         </div>
     `
-    
+
     return L.divIcon({
         html: customHtml,
         className: 'custom-bus-icon',

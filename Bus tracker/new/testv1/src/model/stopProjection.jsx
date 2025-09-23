@@ -1,7 +1,7 @@
 import { nearestPointOnLine } from "@turf/nearest-point-on-line"
 
 export default function projectStopToRoute(route) {
-    
+
     const stopGeoJsonData = route.features[0].properties.route_stops.map(stopData => ({
         type: "Feature",
         geometry: stopData.stop.geometry,
@@ -14,7 +14,7 @@ export default function projectStopToRoute(route) {
 
     const stopCal = stopGeoJsonData.map(
         stop => {
-            const stopPoint = nearestPointOnLine(route, stop.geometry.coordinates, {units: "miles"})
+            const stopPoint = nearestPointOnLine(route, stop.geometry.coordinates, { units: "miles" })
 
             return {
                 stopName: stop.properties.stop_name,
