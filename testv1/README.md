@@ -19,9 +19,9 @@ This project is still under active development, but the essential features are f
 * **"Fly-to" Feature:** Automatically pans the map to the next stop for a seamless viewing experience.
 * **Bus Progression System:** A unique feature that visually represents the bus's progress along the route, proportional to the actual distance covered.
 <p align="center">
-  <img src="src/assets/screenshots/route-detail.png" alt="Route details" height="300">&nbsp;&nbsp;&nbsp;&nbsp;
-  <img src="src/assets/screenshots/home-screen.png" alt="Home screen" height="300">&nbsp;&nbsp;&nbsp;&nbsp;
-  <img src="src/assets/screenshots/display-routes.png" alt="Display routes" height="300">
+  <img src="src/assets/screenshots/route-detail.png" alt="Route details" height="600">&nbsp;&nbsp;&nbsp;&nbsp;
+  <img src="src/assets/screenshots/home-screen.png" alt="Home screen" height="600">&nbsp;&nbsp;&nbsp;&nbsp;
+  <img src="src/assets/screenshots/display-routes.png" alt="Display routes" height="600">
 </p>
 
 
