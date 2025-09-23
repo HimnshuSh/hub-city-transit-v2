@@ -18,6 +18,18 @@ This project is still under active development, but the essential features are f
 * **Interactive Pop-ups:** Provides quick information about stops and the bus's status.
 * **"Fly-to" Feature:** Automatically pans the map to the next stop for a seamless viewing experience.
 * **Bus Progression System:** A unique feature that visually represents the bus's progress along the route, proportional to the actual distance covered.
+<p align="center">
+  <img src="src/assets/screenshots/route-detail.png" alt="Route details" height="300">&nbsp;&nbsp;&nbsp;&nbsp;
+  <img src="src/assets/screenshots/home-screen.png" alt="Home screen" height="300">&nbsp;&nbsp;&nbsp;&nbsp;
+  <img src="src/assets/screenshots/display-routes.png" alt="Display routes" height="300">
+</p>
+
+
+### Planned Features
+
+* **Legend Panel:** A user interface to display a legend for the different bus lines and icons on the map.
+* **Search Functionality:** A search bar to find specific bus stops or routes by name.
+* **GPS Integration:** An option to use the user's current GPS location to find nearby bus stops.
 
 ---
 
