@@ -1,6 +1,7 @@
 import { useRef, useEffect, useState } from 'react'
 import ButtonComponent from './button'
 import L from 'leaflet'
+import { AnimatePresence, motion } from 'motion/react'
 
 import DisplaySchedule from '../model/displaySchedule'
 import DisplayRoutes from '../model/displayRoutes2'
@@ -50,6 +51,31 @@ export default function BottomBar({ busData }) {
         }
     }
 
+    const heightVariants = {
+        initial: { height: 0, opacity: 0 },
+
+        animate: {
+            height: 'auto',
+            opacity: 1,
+            transition: {
+                height: { type: 'spring', stiffness: 400, damping: 30 },
+                // Apply standard transition to opacity
+                opacity: { duration: 0.2 }
+            }
+        },
+
+        exit: {
+            height: 0,
+            opacity: 0,
+            transition: {
+                // CRITICAL: Ensure height collapse is fast and smooth
+                height: { type: 'tween', duration: 0.3 },
+                opacity: { duration: 0.15 },
+
+            }
+        },
+    }
+
     return (
         <div ref={bottomBarRef}>
             <div className='bottom-bar'>
@@ -63,9 +89,23 @@ export default function BottomBar({ busData }) {
                 ))}
             </div>
 
-            <div className={`function-box`}>
-                {renderActiveComponent()}
-            </div>
+            <AnimatePresence mode='sync'>
+                {activeButton && (
+                    <motion.div
+                        className='function-box'
+                        key={activeButton}
+                        variants={heightVariants}
+                        initial="initial"
+                        animate="animate"
+                        exit="exit"
+
+                        // CRITICAL: Ensure overflow is hidden on the animating element
+                        style={{ overflow: 'hidden' }}
+                    >
+                        {renderActiveComponent()}
+                    </motion.div>
+                )}
+            </AnimatePresence>
         </div>
     )
 }

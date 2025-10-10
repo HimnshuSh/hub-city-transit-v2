@@ -4,9 +4,10 @@ import { fetchBusData, BusLocationLayer } from './busLocationLayer'
 import BusRouteStopLayer from './routes'
 import BottomBar from "./bottombar"
 import 'leaflet/dist/leaflet.css'
-import '../App.css'
+
 import TileLayer from './tileLayer'
 import LocationMarker from './locationMarker'
+import '../App.css'
 
 export default function Map() {
     const position = [31.3114517, -89.3176855] // [latitude, longitude]

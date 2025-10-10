@@ -1,31 +1,43 @@
 @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap');
 
-html, body, #root {
+html,
+body,
+#root {
     margin: 0;
-    padding: 0; /* Add padding: 0 to body and html */
-    height: 100%; /* Ensure html, body, and #root take full height */
-    overflow: hidden; /* Prevent scrolling on the entire page */
+    padding: 0;
+    /* Add padding: 0 to body and html */
+    height: 100%;
+    /* Ensure html, body, and #root take full height */
+    overflow: hidden;
+    /* Prevent scrolling on the entire page */
 }
 
 .app-container {
     margin: 0;
     padding: 0;
     display: flex;
-    flex-direction: column; /* Stack map and bottom bar vertically */
-    height: 100dvh; /* Use 100dvh for full viewport height */
-    width: 100vw; /* Ensure full viewport width */
+    flex-direction: column;
+    /* Stack map and bottom bar vertically */
+    height: 100dvh;
+    /* Use 100dvh for full viewport height */
+    width: 100vw;
+    /* Ensure full viewport width */
 }
+
+
 
 /* Map Component Styling */
 .map-container {
-    flex-grow: 1; /* Allows the map container to take up all available space */
+    flex-grow: 1;
+    /* Allows the map container to take up all available space */
     /* No fixed height needed here, flex-grow handles it */
 }
 
 .function-box {
     background-color: hsl(228, 33%, 97%);
     width: 90%;
-    flex-shrink: 0; /* Ensures it doesn't shrink when map grows */
+    flex-shrink: 0;
+    /* Ensures it doesn't shrink when map grows */
     border: none;
     border-radius: 20px;
     position: fixed;
@@ -44,11 +56,15 @@ html, body, #root {
 .bottom-bar {
     background-color: hsl(228, 33%, 97%);
     display: flex;
-    justify-content: space-evenly; /* Distributes buttons evenly */
-    align-items: center; /* Centers buttons vertically */
-    height: 75px; /* Fixed height for the bottom bar */
+    justify-content: space-evenly;
+    /* Distributes buttons evenly */
+    align-items: center;
+    /* Centers buttons vertically */
+    height: 75px;
+    /* Fixed height for the bottom bar */
     width: 90%;
-    flex-shrink: 0; /* Ensures it doesn't shrink when map grows */
+    flex-shrink: 0;
+    /* Ensures it doesn't shrink when map grows */
     padding: 2px;
     border: none;
     border-radius: 20px;
@@ -80,7 +96,7 @@ html, body, #root {
     color: hsl(0, 0%, 10%);
 }
 
-.bottom-bar-buttons > img {
+.bottom-bar-buttons>img {
     object-fit: contain;
     margin: 5px 0px;
     opacity: 0.95;
@@ -102,7 +118,7 @@ html, body, #root {
     width: 100%;
 }
 
-.fare-items > div{
+.fare-items>div {
     margin: 4px 0px;
     width: 100%;
     display: flex;
@@ -120,7 +136,7 @@ html, body, #root {
     color: hsl(0, 0%, 10%);
 }
 
-.schedule-container > span {
+.schedule-container>span {
     font-weight: 700;
 }
 
@@ -176,7 +192,7 @@ br {
 }
 
 .route-progress-container {
-    width: 15%; 
+    width: 15%;
     position: relative;
     display: flex;
     justify-content: center;
@@ -198,7 +214,7 @@ br {
     margin: 25px 0;
 }
 
-.route-progress-stop-icon > div {
+.route-progress-stop-icon>div {
     height: 14px;
     width: 14px;
     border: solid hsl(0, 0%, 55%) 1px;
@@ -210,14 +226,14 @@ br {
     justify-content: center;
 }
 
-.route-progress-stop-icon > div > div{
+.route-progress-stop-icon>div>div {
     width: 6px;
     height: 6px;
     border: solid hsl(0, 0%, 55%) 1px;
     border-radius: 50%;
 }
 
-.route-progress-bar-container{
+.route-progress-bar-container {
     position: absolute;
     display: flex;
     flex-direction: column;
@@ -235,7 +251,7 @@ br {
     height: 100%;
 }
 
-.bus-marker > img {
+.bus-marker>img {
     height: 10px;
     width: 10px;
     object-fit: contain;
@@ -278,4 +294,42 @@ hr {
     text-align: center;
     font-size: 18px;
     font-weight: 700;
+}
+
+.leaflet-control-zoom.leaflet-bar {
+    box-shadow: 0px 4px 4px #00000030 !important;
+    border: none !important;
+}
+
+/* Target all buttons within the zoom control */
+.leaflet-control-zoom a {
+    color: hsl(0, 0%, 10%);
+    /* Change the text/icon color to white */
+    background-color: hsl(228, 33%, 97%);
+    /* Change the background color */
+    /* Add a darker separator */
+
+}
+
+/* Target the zoom-in button specifically */
+.leaflet-control-zoom-in {
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    /* You can override other styles here */
+    border: none;
+
+}
+
+/* Target the zoom-out button specifically */
+.leaflet-control-zoom-out {
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    /* You can override other styles here */
+    border: none;
+
+}
+
+/* Change style on hover */
+.leaflet-control-zoom a:hover {
+    background-color: #0093d9;
 }

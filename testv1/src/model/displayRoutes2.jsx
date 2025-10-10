@@ -8,6 +8,7 @@ import BusIcon from '../assets/icons/bus-icon2.png'
 import L from "leaflet"
 import getRouteNames from '../util/getRouteNames'
 import isEqual from 'react-fast-compare'
+import { AnimatePresence, motion } from 'motion/react'
 
 function StopName({ stopDataArray, busData }) {
     const map = useMap()
@@ -169,6 +170,32 @@ function Route({ busName, showRoute, setShowRoute, busData }) {
         }
     }, [busData, showRoute])
 
+
+    const heightVariants = {
+        initial: { height: 0, opacity: 0 },
+
+        animate: {
+            height: 'auto',
+            opacity: 1,
+            transition: {
+                height: { type: 'spring', stiffness: 400, damping: 30 },
+                // Apply standard transition to opacity
+                opacity: { duration: 0.2 }
+            }
+        },
+
+        exit: {
+            height: 0,
+            opacity: 0,
+            transition: {
+                // CRITICAL: Ensure height collapse is fast and smooth
+                height: { type: 'tween', duration: 0.3 },
+                opacity: { duration: 0.15 },
+
+            }
+        },
+    }
+
     return (
         <div className='route-container-items'>
             <div ref={ref} className='route-header' onClick={toggleRoute}>
@@ -178,12 +205,23 @@ function Route({ busName, showRoute, setShowRoute, busData }) {
                 </div>
                 <div>{showRoute === busName ? '-' : '+'}</div>
             </div>
-            {showRoute === busName && routeContent &&
-                <div className='route-content'>
-                    <div className='route-desc'>{expData.current.route.features[0].properties.route_desc}</div>
-                    <StopName stopDataArray={expData.current.stopDataArray} busData={routeContent.busData} />
-                </div>
-            }
+            <AnimatePresence mode='sync'>
+                {showRoute === busName && routeContent &&
+                    <motion.div
+                        className='route-content'
+                        key={showRoute}
+                        variants={heightVariants}
+                        initial="initial"
+                        animate="animate"
+                        exit="exit"
+
+                    >
+                        <div className='route-desc'>{expData.current.route.features[0].properties.route_desc}</div>
+                        <StopName stopDataArray={expData.current.stopDataArray} busData={routeContent.busData} />
+                    </motion.div>
+                }
+            </AnimatePresence>
+
         </div>
     )
 }
