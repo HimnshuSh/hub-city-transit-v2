@@ -81,7 +81,6 @@ function RouteStopLayer({ data, routeColor }) { // Renamed 'color' prop to 'rout
                     width: 70%;
                     height: 70%;
                     object-fit: contain;
-                    position: absolute;
                 "/>
             </div>   
         `
@@ -133,31 +132,61 @@ function RouteStopLayer({ data, routeColor }) { // Renamed 'color' prop to 'rout
             if (!isEqual(prevZoom.current, currentZoom)) {
                 if (currentZoom > 17) {
                     stopLayer.eachLayer(function (marker) {
-                        marker.setRadius(7.5)
+                        marker.setStyle(
+                            {
+                                radius: 7.5,
+                                weight: 3
+                            }
+                        )
                     })
                     stationTransferLayer.eachLayer(function (circleMarker) {
                         if (circleMarker.feature.properties.type === "Transfer") {
-                            circleMarker.setRadius(7.5)
+                            circleMarker.setStyle(
+                                {
+                                    radius: 7.5,
+                                    weight: 3
+                                }
+                            )
                         }
                     })
                 }
                 else if (currentZoom > 14 && currentZoom <= 17) {
                     stopLayer.eachLayer(function (marker) {
-                        marker.setRadius(5)
+                        marker.setStyle(
+                            {
+                                radius: 5,
+                                weight: 2
+                            }
+                        )
                     })
                     stationTransferLayer.eachLayer(function (circleMarker) {
                         if (circleMarker.feature.properties.type === "Transfer") {
-                            circleMarker.setRadius(5)
+                            circleMarker.setStyle(
+                                {
+                                    radius: 5,
+                                    weight: 2
+                                }
+                            )
                         }
                     })
                 }
                 else if (currentZoom <= 14) {
                     stopLayer.eachLayer(function (marker) {
-                        marker.setRadius(3)
+                        marker.setStyle(
+                            {
+                                radius: 3,
+                                weight: 1
+                            }
+                        )
                     })
                     stationTransferLayer.eachLayer(function (circleMarker) {
                         if (circleMarker.feature.properties.type === "Transfer") {
-                            circleMarker.setRadius(3)
+                            circleMarker.setStyle(
+                                {
+                                    radius: 3,
+                                    weight: 1
+                                }
+                            )
                         }
                     })
                 }
