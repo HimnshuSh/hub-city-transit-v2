@@ -11,6 +11,7 @@ import isEqual from 'react-fast-compare'
 import { AnimatePresence, motion } from 'motion/react'
 
 function StopName({ stopDataArray, busData }) {
+    const busDataLen = Object.keys(busData).length
     const map = useMap()
 
     const handleNextStopClick = (stopData) => {
@@ -56,7 +57,7 @@ function StopName({ stopDataArray, busData }) {
             <div className='route-progress-container'>
                 {
                     (heights.length !== 0) && <div className='route-progress-stop-icon-container'>
-                        {heights.map((height, index) => <div className='route-progress-stop-icon' key={`stop-marker-${index}`} style={{ height: `${height}px` }}><div><div style={{ backgroundColor: `${busColor[busData.busFullName]}` }}></div></div></div>)}
+                        {heights.map((height, index) => <div className='route-progress-stop-icon' key={`stop-marker-${index}`} style={{ height: `${height}px` }}><div><div style={{ backgroundColor: `${busColor[busDataLen !== 2 ? busData.busFullName : busData.data2.busFullName]}` }}></div></div></div>)}
                     </div>
                 }
                 {
@@ -80,31 +81,105 @@ function StopName({ stopDataArray, busData }) {
                     </div>
                 }
                 {
-                    (heights.length !== 0) && <div className='route-progress-bar-container' style={{ top: `${heights[0] / 2 + 25}px` }}>
-                        {progressheight.map((data, index) => <div className='bus-progress' key={`bus-marker-${index}`} style={{ height: `${data.height}px`, backgroundColor: "transparent", position: 'relative' }}>
-                            {(busData.stopId === data.stopId) && (
+                    (heights.length !== 0 && busDataLen !== 2) ? (
+                        <div className='route-progress-bar-container' style={{ top: `${heights[0] / 2 + 25}px` }}>
+
+                            {progressheight.map((data, index) => (
                                 <div
-                                    className='bus-marker'
-                                    style={
-                                        {
-                                            height: '14px',
-                                            width: '14px',
-                                            borderRadius: '50%',
-                                            border: `solid hsl(0, 0%, 75%) 1px`,
-                                            position: 'absolute',
-                                            top: `${((busData.busDistance - stopDataArray[index].distance) / data.stopDistance) * data.height - 7.5}px`,
-                                            backgroundColor: `${busColor[busData.busFullName]}`,
-                                            display: 'flex',
-                                            justifyContent: 'center',
-                                            alignItems: 'center',
-                                        }
-                                    }
+                                    className='bus-progress'
+                                    key={`bus-marker-${index}`}
+                                    style={{ height: `${data.height}px`, backgroundColor: "transparent", position: 'relative' }}
                                 >
-                                    <img src={BusIcon} />
+                                    {(busData.stopId === data.stopId) && (
+                                        <div
+                                            className='bus-marker'
+                                            style={
+                                                {
+                                                    height: '14px',
+                                                    width: '14px',
+                                                    borderRadius: '50%',
+                                                    border: `solid hsl(0, 0%, 75%) 1px`,
+                                                    position: 'absolute',
+                                                    top: `${((busData.busDistance - stopDataArray[index].distance) / data.stopDistance) * data.height - 7.5}px`,
+                                                    backgroundColor: `${busColor[busData.busFullName]}`,
+                                                    display: 'flex',
+                                                    justifyContent: 'center',
+                                                    alignItems: 'center',
+                                                }
+                                            }
+                                        >
+                                            <img src={BusIcon} />
+                                        </div>
+                                    )}
                                 </div>
-                            )}
-                        </div>)}
-                    </div>
+                            ))}
+                        </div>
+                    ) : (
+                        <>
+                            <div className='route-progress-bar-container' style={{ top: `${heights[0] / 2 + 25}px` }}>
+                                {progressheight.map((data, index) => (
+                                    <div
+                                        className='bus-progress'
+                                        key={`bus-marker-${index}`}
+                                        style={{ height: `${data.height}px`, backgroundColor: "transparent", position: 'relative' }}
+                                    >
+                                        {(busData.data1.stopId === data.stopId) && (
+                                            <div
+                                                className='bus-marker'
+                                                style={
+                                                    {
+                                                        height: '14px',
+                                                        width: '14px',
+                                                        borderRadius: '50%',
+                                                        border: `solid hsl(0, 0%, 75%) 1px`,
+                                                        position: 'absolute',
+                                                        top: `${((busData.data1.busDistance - stopDataArray[index].distance) / data.stopDistance) * data.height - 7.5}px`,
+                                                        backgroundColor: `${busColor[busData.data1.busFullName]}`,
+                                                        display: 'flex',
+                                                        justifyContent: 'center',
+                                                        alignItems: 'center',
+                                                    }
+                                                }
+                                            >
+                                                <img src={BusIcon} />
+                                            </div>
+                                        )}
+                                    </div>
+                                ))}
+                            </div>
+                            <div className='route-progress-bar-container' style={{ top: `${heights[0] / 2 + 25}px` }}>
+                                {progressheight.map((data, index) => (
+                                    <div
+                                        className='bus-progress'
+                                        key={`bus-marker-${index}`}
+                                        style={{ height: `${data.height}px`, backgroundColor: "transparent", position: 'relative' }}
+                                    >
+                                        {(busData.data2.stopId === data.stopId) && (
+                                            <div
+                                                className='bus-marker'
+                                                style={
+                                                    {
+                                                        height: '14px',
+                                                        width: '14px',
+                                                        borderRadius: '50%',
+                                                        border: `solid hsl(0, 0%, 75%) 1px`,
+                                                        position: 'absolute',
+                                                        top: `${((busData.data2.busDistance - stopDataArray[index].distance) / data.stopDistance) * data.height - 7.5}px`,
+                                                        backgroundColor: `${busColor[busData.data2.busFullName]}`,
+                                                        display: 'flex',
+                                                        justifyContent: 'center',
+                                                        alignItems: 'center',
+                                                    }
+                                                }
+                                            >
+                                                <img src={BusIcon} />
+                                            </div>
+                                        )}
+                                    </div>
+                                ))}
+                            </div>
+                        </>
+                    )
                 }
             </div>
             <div className='route-stopname-container'>
@@ -119,6 +194,15 @@ function StopName({ stopDataArray, busData }) {
 }
 
 function Route({ busName, showRoute, setShowRoute, busData }) {
+    const busDataLen = Object.keys(busData).length
+
+    let busData1 = null
+    let busData2 = null
+
+    if (busDataLen == 2) {
+        busData1 = busData.bus1
+        busData2 = busData.bus2
+    }
 
     const ref = useRef(null)
     const routeNames = getRouteNames(busName)
@@ -149,20 +233,46 @@ function Route({ busName, showRoute, setShowRoute, busData }) {
         if (showRoute === busName) {
             if (!routeContent || !isEqual(prevBusData.current, busData)) {
 
-                const nextstopData = getNextStop(busData, true)
-                const data = {
-                    busFullName: busData.properties.full_name,
-                    busDistance: nextstopData.busDistance,
-                    stopName: nextstopData.stopName,
-                    stopDistance: nextstopData.distance,
-                    stopId: nextstopData.stopId
+                if (busDataLen == 2) {
+                    const nextstopData1 = getNextStop(busData1, true)
+                    const data1 = {
+                        busFullName: busData1.properties.full_name,
+                        busDistance: nextstopData1.busDistance,
+                        stopName: nextstopData1.stopName,
+                        stopDistance: nextstopData1.distance,
+                        stopId: nextstopData1.stopId
+                    }
+                    const nextstopData2 = getNextStop(busData2, true)
+                    const data2 = {
+                        busFullName: busData2.properties.full_name,
+                        busDistance: nextstopData2.busDistance,
+                        stopName: nextstopData2.stopName,
+                        stopDistance: nextstopData2.distance,
+                        stopId: nextstopData2.stopId
+                    }
+
+                    prevBusData.current = busData
+
+                    setRouteContent({
+                        data1,
+                        data2
+                    })
+                } else {
+                    const nextstopData = getNextStop(busData, true)
+                    const data = {
+                        busFullName: busData.properties.full_name,
+                        busDistance: nextstopData.busDistance,
+                        stopName: nextstopData.stopName,
+                        stopDistance: nextstopData.distance,
+                        stopId: nextstopData.stopId
+                    }
+
+                    prevBusData.current = busData
+
+                    setRouteContent({
+                        busData: data
+                    })
                 }
-
-                prevBusData.current = busData
-
-                setRouteContent({
-                    busData: data
-                })
             }
         }
         else {
@@ -217,7 +327,7 @@ function Route({ busName, showRoute, setShowRoute, busData }) {
 
                     >
                         <div className='route-desc'>{expData.current.route.features[0].properties.route_desc}</div>
-                        <StopName stopDataArray={expData.current.stopDataArray} busData={routeContent.busData} />
+                        <StopName stopDataArray={expData.current.stopDataArray} busData={(busDataLen !== 2) ? routeContent.busData : routeContent} />
                     </motion.div>
                 }
             </AnimatePresence>
@@ -236,11 +346,11 @@ export default function DisplayRoutes({ busData }) {
 
     return (
         <div className='route-container'>
-            <Route busName={"hct Gold1"} showRoute={showRoute} setShowRoute={setShowRoute} busData={busObject["hct Gold1"]} />
+            <Route busName={"hct Gold1"} showRoute={showRoute} setShowRoute={setShowRoute} busData={{ "bus1": busObject["hct Gold1"], "bus2": busObject["hct gold2"] }} />
             <hr className='route' />
             <Route busName={"hct green"} showRoute={showRoute} setShowRoute={setShowRoute} busData={busObject["hct green"]} />
             <hr className='route' />
-            <Route busName={"hct blue1"} showRoute={showRoute} setShowRoute={setShowRoute} busData={busObject["hct blue1"]} />
+            <Route busName={"hct blue1"} showRoute={showRoute} setShowRoute={setShowRoute} busData={{ "bus1": busObject["hct blue1"], "bus2": busObject["hct blue2"] }} />
             <hr className='route' />
             <Route busName={"hct brown"} showRoute={showRoute} setShowRoute={setShowRoute} busData={busObject["hct brown"]} />
             <hr className='route' />
