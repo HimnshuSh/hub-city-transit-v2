@@ -7,7 +7,7 @@ import etaForNextStop from '../model/etaForNextStop'
 import L from 'leaflet'
 import isEqual from "react-fast-compare"
 
-export default function BusMarker({ busData }) {
+export default function BusMarker({ busData, searchLayers }) {
     const { geometry, properties } = busData
     const position = [geometry.coordinates[1], geometry.coordinates[0]]
     const icon = busDivIcon(properties.full_name, properties.course)
@@ -21,7 +21,16 @@ export default function BusMarker({ busData }) {
     const stopData = getNextStop(busData)
     const color = busColor[properties.full_name]
 
+    const busMarkerLayerRef = useRef(null)
+
     useEffect(() => {
+        if (searchLayers && searchLayers.current) {
+            // Corrected layer assignment from previous steps
+            searchLayers.current.addLayer(busMarkerLayerRef.current)
+        } else {
+            // Optional: Log a warning if the layer group isn't ready
+            console.warn("searchLayers ref is not ready or was not passed correctly.");
+        }
         if (!isEqual(prevBusData.current, busData)) {
             if (open & stopData.stopName !== "N/A") {
                 etaForNextStop(busData, stopData).then(
@@ -56,7 +65,8 @@ export default function BusMarker({ busData }) {
 
     return (
         <Marker position={position} icon={icon} eventHandlers={
-            { popupopen: () => { setOpen(true) }, popupclose: () => { setOpen(false) } }}>
+            { popupopen: () => { setOpen(true) }, popupclose: () => { setOpen(false) } }}
+            searchName={capitalizeWords(properties.full_name)} ref={busMarkerLayerRef}>
             <Popup className='popup'>
                 <div className='popup-container'>
                     <div className='bus-marker-popup-name' style={{ color: color }}>

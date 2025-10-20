@@ -12,7 +12,7 @@ import BusIcon from '../assets/icons/bus-icon2.png'
 import stationTransferStops from '../assets/data/route/stationTransferStop.json'
 import isEqual from "react-fast-compare"
 
-function RouteStopLayer({ data, routeColor }) { // Renamed 'color' prop to 'routeColor' for consistency
+function RouteStopLayer({ data, routeColor, searchLayers }) { // Renamed 'color' prop to 'routeColor' for consistency
 
     const map = useMap()
     const prevZoom = useRef()
@@ -47,6 +47,11 @@ function RouteStopLayer({ data, routeColor }) { // Renamed 'color' prop to 'rout
         }
 
         const stopLayer = L.geoJSON(stopFeatureCollection, {
+            onEachFeature: function (feature, layer) {
+                // FIX 1: Set the searchName on the GeoJSON structure first.
+                // This is the most reliable way for L.Control.Search to find the value.
+                feature.properties.searchName = feature.properties.stopName;
+            },
             pointToLayer: function (feature, latlng) {
                 return L.circleMarker(latlng, {
                     radius: 3, // Size of the circle marker
@@ -54,7 +59,9 @@ function RouteStopLayer({ data, routeColor }) { // Renamed 'color' prop to 'rout
                     color: "white", // Border color
                     weight: 1,      // Border weight
                     opacity: 1,
-                    fillOpacity: 1
+                    fillOpacity: 1,
+                    searchName: feature.properties.stop_name,
+                    title: feature.properties.stop_name
                 }).bindPopup(`
                     <div class="route-layer">
                         <span style="display: block; text-align: center; margin-bottom: 5px; font-size: 16px; font-weight: 600;">Regular Stop</span>
@@ -65,6 +72,9 @@ function RouteStopLayer({ data, routeColor }) { // Renamed 'color' prop to 'rout
                 `)
             }
         }).addTo(map)
+
+
+
 
         const stationIconHtml = `
             <div style="
@@ -94,7 +104,13 @@ function RouteStopLayer({ data, routeColor }) { // Renamed 'color' prop to 'rout
         })
 
         const stationTransferLayer = L.geoJSON(stationTransferStops, {
+            onEachFeature: function (feature, layer) {
+                // FIX 1: Set the searchName on the GeoJSON structure first.
+                // This is the most reliable way for L.Control.Search to find the value.
+                feature.properties.searchName = feature.properties.stop_name;
+            },
             pointToLayer: function (feature, latlng) {
+
                 if (feature.properties.type === "Transfer") {
                     const routeNamesString = feature.properties.routeNames.join(", ")
                     return L.circleMarker(latlng, {
@@ -103,7 +119,9 @@ function RouteStopLayer({ data, routeColor }) { // Renamed 'color' prop to 'rout
                         color: "black",
                         weight: 1,
                         opacity: 1,
-                        fillOpacity: 1
+                        fillOpacity: 1,
+                        searchName: feature.properties.stopName,
+                        title: feature.properties.stopName
                     }).bindPopup(`
                         <div class="route-layer">
                             <span style="display: block; text-align: center; margin-bottom: 5px; font-size: 16px; font-weight: 600;">Transfer Stop</span>
@@ -126,6 +144,15 @@ function RouteStopLayer({ data, routeColor }) { // Renamed 'color' prop to 'rout
             }
         }).addTo(map)
 
+        if (searchLayers && searchLayers.current) {
+            // Corrected layer assignment from previous steps
+            searchLayers.current.addLayer(stopLayer)
+            searchLayers.current.addLayer(stationTransferLayer)
+        } else {
+            // Optional: Log a warning if the layer group isn't ready
+            console.warn("searchLayers ref is not ready or was not passed correctly.");
+        }
+
 
         map.on('zoomend', () => {
             const currentZoom = map.getZoom()
@@ -134,7 +161,7 @@ function RouteStopLayer({ data, routeColor }) { // Renamed 'color' prop to 'rout
                     stopLayer.eachLayer(function (marker) {
                         marker.setStyle(
                             {
-                                radius: 7.5,
+                                radius: 9,
                                 weight: 3
                             }
                         )
@@ -143,7 +170,7 @@ function RouteStopLayer({ data, routeColor }) { // Renamed 'color' prop to 'rout
                         if (circleMarker.feature.properties.type === "Transfer") {
                             circleMarker.setStyle(
                                 {
-                                    radius: 7.5,
+                                    radius: 9,
                                     weight: 3
                                 }
                             )
@@ -154,7 +181,7 @@ function RouteStopLayer({ data, routeColor }) { // Renamed 'color' prop to 'rout
                     stopLayer.eachLayer(function (marker) {
                         marker.setStyle(
                             {
-                                radius: 5,
+                                radius: 6,
                                 weight: 2
                             }
                         )
@@ -163,7 +190,7 @@ function RouteStopLayer({ data, routeColor }) { // Renamed 'color' prop to 'rout
                         if (circleMarker.feature.properties.type === "Transfer") {
                             circleMarker.setStyle(
                                 {
-                                    radius: 5,
+                                    radius: 6,
                                     weight: 2
                                 }
                             )
@@ -204,17 +231,17 @@ function RouteStopLayer({ data, routeColor }) { // Renamed 'color' prop to 'rout
 
 }
 
-export default function BusRouteStopLayer() {
+export default function BusRouteStopLayer({ searchLayers }) { // 👈 FIX: Accept searchLayers as a prop
     return (
         <>
-            <RouteStopLayer data={greenRoute} routeColor={"hsl(112, 63%, 52%)"} />
-            <RouteStopLayer data={goldRoute} routeColor={"hsl(44, 96%, 59%)"} />
-            <RouteStopLayer data={blueRoute} routeColor={"hsl(200, 100%, 50%)"} />
-            <RouteStopLayer data={redRoute} routeColor={"hsl(12, 82%, 50%)"} />
-            <RouteStopLayer data={orangeRoute} routeColor={"hsl(27, 100%, 50%)"} />
-            <RouteStopLayer data={redRoute} routeColor={"hsl(12, 82%, 50%)"} />
-            <RouteStopLayer data={brownRoute} routeColor={"hsl(17, 74%, 37%)"} />
-            <RouteStopLayer data={purpleRoute} routeColor={"hsl(250, 100%, 77%)"} />
+            <RouteStopLayer searchLayers={searchLayers} data={greenRoute} routeColor={"hsl(112, 63%, 52%)"} />
+            <RouteStopLayer searchLayers={searchLayers} data={goldRoute} routeColor={"hsl(44, 96%, 59%)"} />
+            <RouteStopLayer searchLayers={searchLayers} data={blueRoute} routeColor={"hsl(200, 100%, 50%)"} />
+            <RouteStopLayer searchLayers={searchLayers} data={redRoute} routeColor={"hsl(12, 82%, 50%)"} />
+            <RouteStopLayer searchLayers={searchLayers} data={orangeRoute} routeColor={"hsl(27, 100%, 50%)"} />
+            <RouteStopLayer searchLayers={searchLayers} data={redRoute} routeColor={"hsl(12, 82%, 50%)"} />
+            <RouteStopLayer searchLayers={searchLayers} data={brownRoute} routeColor={"hsl(17, 74%, 37%)"} />
+            <RouteStopLayer searchLayers={searchLayers} data={purpleRoute} routeColor={"hsl(250, 100%, 77%)"} />
         </>
     )
 }

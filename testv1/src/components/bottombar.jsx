@@ -9,7 +9,7 @@ import DisplaySearch from '../model/displaySearch'
 import DisplayFare from '../model/displayFare'
 import DisplayLegend from '../model/displayLegend'
 
-export default function BottomBar({ busData }) {
+export default function BottomBar({ busData, searchLayers }) {
     const [activeButton, setActiveButton] = useState(null)
     const bottomBarRef = useRef(null)
 
@@ -41,7 +41,7 @@ export default function BottomBar({ busData }) {
             case 'Routes':
                 return <DisplayRoutes busData={busData} />
             case 'Search':
-                return <DisplaySearch />
+                return <DisplaySearch searchLayers={searchLayers} />
             case 'Fare':
                 return <DisplayFare />
             case 'Legend':
