@@ -400,9 +400,20 @@ hr {
     font-weight: 700;
 }
 
+
+.leaflet-touch .leaflet-bar {
+    border: none;
+    background-clip: padding-box;
+    box-shadow: 0px 4px 4px #00000030;
+}
+
 .leaflet-control-zoom.leaflet-bar {
     box-shadow: 0px 4px 4px #00000030 !important;
     border: none !important;
+}
+
+a.leaflet-bar-part.leaflet-bar-part-single {
+    background-color: hsl(228, 33%, 97%);
 }
 
 /* Target all buttons within the zoom control */
