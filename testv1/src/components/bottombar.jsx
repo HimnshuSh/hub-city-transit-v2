@@ -9,16 +9,22 @@ import DisplaySearch from '../model/displaySearch'
 import DisplayFare from '../model/displayFare'
 import DisplayLegend from '../model/displayLegend'
 
+import scheduleIcon from '../assets/icons/schedule-icon2.png';
+import routeIcon from '../assets/icons/route-icon.png';
+import searchIcon from '../assets/icons/search-icon2.png';
+import fareIcon from '../assets/icons/fare-icon.png';
+import legendIcon from '../assets/icons/legend-icon.png';
+
 export default function BottomBar({ busData, searchLayers }) {
     const [activeButton, setActiveButton] = useState(null)
     const bottomBarRef = useRef(null)
 
     const buttonArray = [
-        { name: 'Schedule', icon: 'src/assets/icons/schedule-icon2.png', height: '30px' },
-        { name: 'Routes', icon: 'src/assets/icons/route-icon.png', height: '30px' },
-        { name: 'Search', icon: 'src/assets/icons/search-icon2.png', height: '30px' },
-        { name: 'Fare', icon: 'src/assets/icons/fare-icon.png', height: '30px' },
-        { name: 'Legend', icon: 'src/assets/icons/legend-icon.png', height: '30px' },
+        { name: 'Schedule', icon: scheduleIcon, height: '30px' },
+        { name: 'Routes', icon: routeIcon, height: '30px' },
+        { name: 'Search', icon: searchIcon, height: '30px' },
+        { name: 'Fare', icon: fareIcon, height: '30px' },
+        { name: 'Legend', icon: legendIcon, height: '30px' },
     ]
 
     function handleButtonClick(buttonName) {

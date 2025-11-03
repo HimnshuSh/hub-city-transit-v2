@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import isEqual from 'react-fast-compare'
-import BusMarker from './busMarker'
+import BusMarker from './busMarker2'
 
 export function fetchBusData(busLoctionUrl, setBusData, prevBusData) {
 
@@ -13,7 +13,6 @@ export function fetchBusData(busLoctionUrl, setBusData, prevBusData) {
                 setBusData(data)
                 prevBusData.current = data
             }
-
         }
 
         getBusData(busLoctionUrl)
@@ -29,7 +28,7 @@ export function BusLocationLayer({ data, searchLayers }) {
 
     return (
         <>
-            {data.features.map(busData => (
+            {data.cacheProcessedBusData.features.map(busData => (
                 <BusMarker key={busData.properties.full_name} busData={busData} searchLayers={searchLayers} />
             ))}
         </>
