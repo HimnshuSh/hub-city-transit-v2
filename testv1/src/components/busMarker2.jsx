@@ -11,13 +11,20 @@ export default function BusMarker({ busData, searchLayers }) {
     const icon = busDivIcon(properties.full_name, properties.course)
     const map = useMap()
 
+    const timeOptions = {
+        hour: 'numeric',
+        minute: '2-digit',
+        second: '2-digit',
+        hour12: true
+    }
+
     const lastKnownTime = new Date(properties.location_timestamp)
     let etaTimeString = 'N/A';
     if (properties.eta !== null) {
 
         const etaTimeCalculated = new Date(lastKnownTime.getTime());
         etaTimeCalculated.setSeconds(etaTimeCalculated.getSeconds() + properties.eta);
-        etaTimeString = etaTimeCalculated.toLocaleTimeString();
+        etaTimeString = etaTimeCalculated.toLocaleTimeString('en-US', timeOptions);
     }
 
     const stopData = getNextStop(busData)
@@ -67,7 +74,7 @@ export default function BusMarker({ busData, searchLayers }) {
                         {(stopData.stopName === "N/A") ? "N/A" : stopData.stopName}
                     </span>
                     <br />
-                    Last Known Time: {lastKnownTime.toLocaleTimeString()}
+                    Last Known Time: {lastKnownTime.toLocaleTimeString('en-US', timeOptions)}
                     <br />
                     ETA: {etaTimeString}
                 </div>

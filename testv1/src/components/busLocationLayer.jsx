@@ -28,7 +28,7 @@ export function BusLocationLayer({ data, searchLayers }) {
 
     return (
         <>
-            {data.features.map(busData => (
+            {data?.features?.map(busData => (
                 <BusMarker key={busData.properties.full_name} busData={busData} searchLayers={searchLayers} />
             ))}
         </>

@@ -90,7 +90,7 @@ function StopName({ stopDataArray, busData }) {
                                     key={`bus-marker-${index}`}
                                     style={{ height: `${data.height}px`, backgroundColor: "transparent", position: 'relative' }}
                                 >
-                                    {(busData.stopId === data.stopId) && (
+                                    {('stopId' in busData) && (busData.stopId === data.stopId) && (
                                         <div
                                             className='bus-marker'
                                             style={
@@ -123,7 +123,7 @@ function StopName({ stopDataArray, busData }) {
                                         key={`bus-marker-${index}`}
                                         style={{ height: `${data.height}px`, backgroundColor: "transparent", position: 'relative' }}
                                     >
-                                        {(busData.data1.stopId === data.stopId) && (
+                                        {('stopId' in busData.data1) && (busData.data1.stopId === data.stopId) && (
                                             <div
                                                 className='bus-marker'
                                                 style={
@@ -154,7 +154,7 @@ function StopName({ stopDataArray, busData }) {
                                         key={`bus-marker-${index}`}
                                         style={{ height: `${data.height}px`, backgroundColor: "transparent", position: 'relative' }}
                                     >
-                                        {(busData.data2.stopId === data.stopId) && (
+                                        {('stopId' in busData.data2) && (busData.data2.stopId === data.stopId) && (
                                             <div
                                                 className='bus-marker'
                                                 style={
@@ -194,7 +194,7 @@ function StopName({ stopDataArray, busData }) {
 }
 
 function Route({ busName, showRoute, setShowRoute, busData }) {
-    const busDataLen = Object.keys(busData).length
+    const busDataLen = busData ? Object.keys(busData).length : null
 
     let busData1 = null
     let busData2 = null
@@ -234,21 +234,25 @@ function Route({ busName, showRoute, setShowRoute, busData }) {
             if (!routeContent || !isEqual(prevBusData.current, busData)) {
 
                 if (busDataLen == 2) {
-                    const nextstopData1 = getNextStop(busData1, true)
-                    const data1 = {
+                    const nextstopData1 = busData1 ? getNextStop(busData1, true) : null
+                    const data1 = busData1 ? {
                         busFullName: busData1.properties.full_name,
                         busDistance: nextstopData1.busDistance,
                         stopName: nextstopData1.stopName,
                         stopDistance: nextstopData1.distance,
                         stopId: nextstopData1.stopId
+                    } : {
+                        busFullName: busName
                     }
-                    const nextstopData2 = getNextStop(busData2, true)
-                    const data2 = {
+                    const nextstopData2 = busData2 ? getNextStop(busData2, true) : null
+                    const data2 = busData2 ? {
                         busFullName: busData2.properties.full_name,
                         busDistance: nextstopData2.busDistance,
                         stopName: nextstopData2.stopName,
                         stopDistance: nextstopData2.distance,
                         stopId: nextstopData2.stopId
+                    } : {
+                        busFullName: busName
                     }
 
                     prevBusData.current = busData
@@ -258,13 +262,15 @@ function Route({ busName, showRoute, setShowRoute, busData }) {
                         data2
                     })
                 } else {
-                    const nextstopData = getNextStop(busData, true)
-                    const data = {
+                    const nextstopData = busData ? getNextStop(busData, true) : null
+                    const data = busData ? {
                         busFullName: busData.properties.full_name,
                         busDistance: nextstopData.busDistance,
                         stopName: nextstopData.stopName,
                         stopDistance: nextstopData.distance,
                         stopId: nextstopData.stopId
+                    } : {
+                        busFullName: busName
                     }
 
                     prevBusData.current = busData
@@ -339,26 +345,71 @@ function Route({ busName, showRoute, setShowRoute, busData }) {
 export default function DisplayRoutes({ busData }) {
     const [showRoute, setShowRoute] = useState(null)
 
-    const busObject = busData.features.reduce((acc, bus) => {
+    const busObject = busData?.features.reduce((acc, bus) => {
         acc[bus.properties.full_name] = bus
         return acc
-    }, {})
+    }, {}) || {}
+
+    const getBus = (name) => {
+        return busObject[name] || null
+    }
 
     return (
         <div className='route-container'>
-            <Route busName={"hct Gold1"} showRoute={showRoute} setShowRoute={setShowRoute} busData={{ "bus1": busObject["hct Gold1"], "bus2": busObject["hct gold2"] }} />
+            <Route
+                busName={"hct Gold1"}
+                showRoute={showRoute}
+                setShowRoute={setShowRoute}
+                busData={{ "bus1": getBus("hct Gold1"), "bus2": getBus("hct gold2") }}
+            />
             <hr className='route' />
-            <Route busName={"hct green"} showRoute={showRoute} setShowRoute={setShowRoute} busData={busObject["hct green"]} />
+
+            <Route
+                busName={"hct green"}
+                showRoute={showRoute}
+                setShowRoute={setShowRoute}
+                busData={getBus("hct green")}
+            />
             <hr className='route' />
-            <Route busName={"hct blue1"} showRoute={showRoute} setShowRoute={setShowRoute} busData={{ "bus1": busObject["hct blue1"], "bus2": busObject["hct blue2"] }} />
+
+            <Route
+                busName={"hct blue1"}
+                showRoute={showRoute}
+                setShowRoute={setShowRoute}
+                busData={{ "bus1": getBus("hct blue1"), "bus2": getBus("hct blue2") }}
+            />
             <hr className='route' />
-            <Route busName={"hct brown"} showRoute={showRoute} setShowRoute={setShowRoute} busData={busObject["hct brown"]} />
+
+            <Route
+                busName={"hct brown"}
+                showRoute={showRoute}
+                setShowRoute={setShowRoute}
+                busData={getBus("hct brown")}
+            />
             <hr className='route' />
-            <Route busName={"hct red"} showRoute={showRoute} setShowRoute={setShowRoute} busData={busObject["hct red"]} />
+
+            <Route
+                busName={"hct red"}
+                showRoute={showRoute}
+                setShowRoute={setShowRoute}
+                busData={getBus("hct red")}
+            />
             <hr className='route' />
-            <Route busName={"hct purple"} showRoute={showRoute} setShowRoute={setShowRoute} busData={busObject["hct purple"]} />
+
+            <Route
+                busName={"hct purple"}
+                showRoute={showRoute}
+                setShowRoute={setShowRoute}
+                busData={getBus("hct purple")}
+            />
             <hr className='route' />
-            <Route busName={"hct orange"} showRoute={showRoute} setShowRoute={setShowRoute} busData={busObject["hct orange"]} />
+
+            <Route
+                busName={"hct orange"}
+                showRoute={showRoute}
+                setShowRoute={setShowRoute}
+                busData={getBus("hct orange")}
+            />
         </div>
     )
 }
