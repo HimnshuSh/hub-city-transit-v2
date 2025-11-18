@@ -345,10 +345,12 @@ function Route({ busName, showRoute, setShowRoute, busData }) {
 export default function DisplayRoutes({ busData }) {
     const [showRoute, setShowRoute] = useState(null)
 
-    const busObject = busData?.features.reduce((acc, bus) => {
-        acc[bus.properties.full_name] = bus
-        return acc
-    }, {}) || {}
+    const busObject = (busData && busData.status !== 'loading')
+        ? busData.features.reduce((acc, bus) => {
+            acc[bus.properties.full_name] = bus;
+            return acc;
+        }, {})
+        : {}
 
     const getBus = (name) => {
         return busObject[name] || null
