@@ -1,4 +1,4 @@
-# Hub-City Transit Bus Tracket
+# Hub-City Transit Bus Tracker
 
 ## Description
 
@@ -18,24 +18,43 @@ This project is still under active development, but the essential features are f
 * **Interactive Pop-ups:** Provides quick information about stops and the bus's status.
 * **"Fly-to" Feature:** Automatically pans the map to the next stop for a seamless viewing experience.
 * **Bus Progression System:** A unique feature that visually represents the bus's progress along the route, proportional to the actual distance covered.
+* **Legend Panel:** A user interface to display a legend for the different bus lines and icons on the map.
+* **Search Functionality:** A search bar to find specific buses, stops or routes by name.
+* **GPS Integration:** An option to use the user's current GPS location to find nearby bus stops.
+
 <p align="center">
   <img src="src/assets/screenshots/route-detail.png" alt="Route details" height="600">&nbsp;&nbsp;&nbsp;&nbsp;
   <img src="src/assets/screenshots/home-screen.png" alt="Home screen" height="600">&nbsp;&nbsp;&nbsp;&nbsp;
   <img src="src/assets/screenshots/display-routes.png" alt="Display routes" height="600">
 </p>
 
+---
+##  Tech Stack
 
-### Planned Features
-
-* **Legend Panel:** A user interface to display a legend for the different bus lines and icons on the map.
-* **Search Functionality:** A search bar to find specific bus stops or routes by name.
-* **GPS Integration:** An option to use the user's current GPS location to find nearby bus stops.
+| Category | Technology |
+| :--- | :--- |
+| **Frontend** | React.js |
+| **Mapping & Visualization** | Leaflet |
+| **Routing & Traffic** | TomTom Routing API |
+| **Styling** | CSS, Framer Motion |
+| **Build Tool** | Vite |
 
 ---
 
-### Prerequisites
+##  Data Sources & API Credits
 
-Before you begin, make sure you have **Node.js** installed on your computer. You can download it from the official Node.js website. Node.js comes with **npm** (Node Package Manager), which you'll need to install the project's dependencies.
+This project leverages industry-standard transit data formats and open-data platforms to provide accurate mapping and tracking.
+
+* **Transit Data ([Transitland](https://www.transit.land/)) :** All static transit entities—including **Stops**, **Routes**, and **Shapes**—are fetched via the Transitland **[GTFS Feed](https://api.transloc.com/gtfs/hct.zip)**
+* **ETA: [TomTom Routing API](https://developer.tomtom.com/routing-api/documentation/tomtom-maps/routing-service?source_app=b2b&source_product=routing-apis)** is utilized to calculate real-time, traffic-aware **ETA**.
+
+* **Live Data Feed:** Real-time bus positions are fetched from this **[endpoint](https://utility.arcgis.com/usrsvcs/servers/b02066689d504f5f9428029f7268e060/rest/services/Hosted/8bd5047cc5bf4195887cc5237cf0d3e0_Track_View/FeatureServer/1/query?f=geojson&returnGeometry=true&spatialRel=esriSpatialRelIntersects&geometry={%22xmin%22:-9952239.718110478,%22ymin%22:3657331.85371723454,%22xmax%22:-9933358.86251328,%22ymax%22:3679195.0687008603,%22spatialReference%22:{%22wkid%22:102100}}&geometryType=esriGeometryEnvelope&inSR=102100&outFields=location_timestamp,course,full_name,speed,location_timestamp&returnCentroid=false&returnExceededLimitFeatures=false&outSR=4326")**
+.
+
+
+
+* **Map Interface:** Base maps and spatial rendering are provided by **[Openfreemap](openfreemap.org) & [OpenStreetMap](https://www.openstreetmap.org/copyright)**.
+
 
 ### API
 
